@@ -5,22 +5,79 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>View Stories</title>
-  <!-- Internal CSS -->
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" type="text/css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
-  <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
+  <!-- Internal Styles: will need to remove /public using these styles as templates -->
+  <link rel="stylesheet" href="/public/vendor/normalize-4.1.1.css" type="text/css" />
+  <link rel="stylesheet" href="/public/vendor/border-box.css" type="text/css" />
+  <link rel="stylesheet" href="/public/styles/layout.css" type="text/css" />
+  <link rel="stylesheet" href="/public/styles/header.css" type="text/css" />
+  <link rel="stylesheet" href="/public/styles/view_story.css" type="text/css" />
   <!-- Internal Scripts -->
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-  <script type="text/javascript" src="/scripts/app.js"></script>
-  <!-- External Scripts -->
+    <!-- <script type="text/javascript" src="/scripts/app.js"></script> -->
+  <!-- External Styles -->
   <link rel="preconnect" href="https://fonts.gstatic.com">
   <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap" rel="stylesheet">
+  <!-- External Scripts -->
+  <script
+  src="https://code.jquery.com/jquery-3.5.1.min.js"
+  integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+  crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/2fff5f5ee5.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <header>HEADER</header>
+  <header>
+    <i class="fas fa-align-justify"></i>
+    <span>Your Story</span>
+    <!-- for muteed sound icon use "fas fa-volume-mute"></i> -->
+    <i class="fas fa-volume-up"></i>
+  </header>
+  <nav></nav>
+  <main>
+    <article class="story">
+      <h1>Story Title</h1>
+      <p><b>By:</b> Author 1, Author 2, Author 3, Author 4, Author 5</p>
+      <br>
+      <div id="entry_1">
+        <img src="http://placeimg.com/640/480/arch">
+        <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
+      </div>
+      <div id="entry_2">
+        <img src="http://placeimg.com/640/480/nature">
+        <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
+      </div>
+      <div id="entry_3">
+        <img src="http://placeimg.com/640/480/people">
+        <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
+      </div>
+      <div id="entry_4">
+        <img src="http://placeimg.com/640/480/tech">
+        <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
+      </div>
+    </article>
+    <h2>The Story isn't over... Vote on what happens next!</h2>
+    <section class="top_contributions">
+      <div>
+        <img src="http://placeimg.com/400/300/arch">
+        <button>Upvote</button>
+        <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
+      </div>
+      <div>
+        <img src="http://placeimg.com/400/300/nature">
+        <button>Upvote</button>
+        <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
+      </div>
+      <div>
+        <img src="http://placeimg.com/400/300/tech">
+        <button>Upvote</button>
+        <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
+      </div>
+    </section>
+    <button class="all_contributions"> See All Contributions</button>
+    <section class="new_contribution">
+      <h2>Want your say? Make a new contribution.</h2>
+      <button>Contribute to the story</button>
+      <br><br>
+    </section>
+  </main>
 
-  <nav>NAV</nav>
-
-  <main>MAIN</main>
 </body>
 </html>
