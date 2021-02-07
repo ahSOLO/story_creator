@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS ambient_sounds CASCADE;
+
+CREATE TABLE ambient_sounds (
+  id SERIAL PRIMARY KEY NOT NULL,
+  type VARCHAR(255) NOT NULL
+);

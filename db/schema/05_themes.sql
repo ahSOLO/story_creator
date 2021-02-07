@@ -1,0 +1,10 @@
+DROP TABLE IF EXISTS themes CASCADE;
+
+CREATE TABLE themes (
+  id SERIAL PRIMARY KEY NOT NULL,
+  photo_id INTEGER REFERENCES photos(id) ON DELETE CASCADE,
+  animation_id INTEGER REFERENCES animations(id) ON DELETE CASCADE,
+  ambient_sound_id INTEGER REFERENCES ambient_sounds(id) ON DELETE CASCADE,
+  text_position VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP NOT NULL DEFAULT NOW()
+);

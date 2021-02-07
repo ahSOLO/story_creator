@@ -1,0 +1,12 @@
+DROP TABLE IF EXISTS contributions CASCADE;
+
+CREATE TABLE contributions (
+  id SERIAL PRIMARY KEY NOT NULL,
+  contributor_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  story_id INTEGER REFERENCES stories(id) ON DELETE CASCADE,
+  theme_id INTEGER REFERENCES themes(id) ON DELETE CASCADE,
+  content TEXT NOT NULL,
+  order_rank INTEGER NOT NULL,
+  status VARCHAR(255) NOT NULL DEFAULT 'pending',
+  created_at TIMESTAMP NOT NULL DEFAULT NOW()
+);
