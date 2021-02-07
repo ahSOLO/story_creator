@@ -60,3 +60,28 @@ section.new_contribution {
   display: flex;
   flex-direction: row;
 }
+
+// Styles for view_contributions page
+
+section.contributions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 80%;
+
+  div {
+    margin: 1em;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+
+    button {
+      margin-top: 2em;
+    }
+  }
+}
+
+button#back {
+  padding: 1em;
+}
