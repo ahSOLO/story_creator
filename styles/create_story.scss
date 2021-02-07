@@ -1,0 +1,30 @@
+form.story_creation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .form_grid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-gap: 1em;
+
+    label {
+      text-align: right;
+    }
+  }
+}
+
+section.suggested_photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1em;
+}
+
+#description {
+  height: 3em;
+}
+
+#entry {
+  height: 6em;
+}

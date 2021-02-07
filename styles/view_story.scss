@@ -2,6 +2,11 @@ main p {
   padding: 1em;
 }
 
+p.created_by{
+  padding-top: 0em;
+  margin-top: 0em;
+}
+
 article.story {
   display: flex;
   flex-direction: column;

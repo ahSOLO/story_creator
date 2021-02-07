@@ -5,7 +5,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>View Stories</title>
-  <!-- Internal Styles: will need to remove /public using these styles as templates -->
+  <!-- Internal Styles: will need to remove '/public' when using these styles as templates -->
   <link rel="stylesheet" href="/public/vendor/normalize-4.1.1.css" type="text/css" />
   <link rel="stylesheet" href="/public/vendor/border-box.css" type="text/css" />
   <link rel="stylesheet" href="/public/styles/layout.css" type="text/css" />
@@ -27,14 +27,14 @@
   <header>
     <i class="fas fa-align-justify"></i>
     <span>Your Story</span>
-    <!-- for muteed sound icon use "fas fa-volume-mute"></i> -->
+    <!-- for muted sound icon use "fas fa-volume-mute"></i> -->
     <i class="fas fa-volume-up"></i>
   </header>
   <nav></nav>
   <main>
     <article class="story">
       <h1>Story Title</h1>
-      <p><b>By:</b> Author 1, Author 2, Author 3, Author 4, Author 5</p>
+      <p class="created_by"><b>By:</b> Author 1, Author 2, Author 3, Author 4, Author 5</p>
       <br>
       <div id="entry_1">
         <img src="http://placeimg.com/640/480/arch">
@@ -71,13 +71,13 @@
         <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
       </div>
     </section>
-    <button class="all_contributions"> See All Contributions</button>
+    <button id="all_contributions"> See All Contributions</button>
+    <br>
     <section class="new_contribution">
       <h2>Want your say? Make a new contribution.</h2>
       <button>Contribute to the story</button>
       <br><br>
     </section>
   </main>
-
 </body>
 </html>
