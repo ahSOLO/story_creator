@@ -1,0 +1,38 @@
+form.create_entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 825px;
+
+  .subtitle {
+    margin-top: 0;
+    padding-top: 0;
+  }
+
+  .form_grid {
+    margin-left: 5%;
+    margin-right: 5%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-gap: 1em;
+
+    label {
+      text-align: right;
+    }
+  }
+}
+
+section.suggested_photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1em;
+}
+
+#description {
+  height: 3em;
+}
+
+#entry {
+  height: 8em;
+}

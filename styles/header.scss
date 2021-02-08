@@ -1,0 +1,17 @@
+header {
+  background-color: lightgray;
+  font-size: 1.25em;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0.25em 0.75em 0.25em 0.75em;
+  align-items: center;
+  margin-bottom: 1em;
+  height: 55px;
+  position: fixed;
+  width: 100%;
+
+  span {
+    font-size: 1.6em;
+  }
+}
