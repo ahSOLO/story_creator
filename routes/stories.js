@@ -25,12 +25,10 @@ module.exports = (db) => {
     res.render("view_stories");
   });
 
-    // "Create Story" button on homepage
-    router.get("/create_story", (req, res) => {
-      res.redirect("/stories/create");
-    });
-
-
+  // "Create Story" button on homepage
+  router.get("/create_story", (req, res) => {
+    res.redirect("/stories/create");
+  });
 
   return router;
 

@@ -47,6 +47,8 @@ app.use("/stories", storyRoutes(db));
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 // This one doesn't use Express router
+
+// This route renders the home page
 app.get("/", (req, res) => {
 
   const queryString = `
