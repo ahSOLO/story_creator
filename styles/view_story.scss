@@ -1,31 +1,23 @@
-html {
-  scroll-snap-type: y proximity;
+header {
+  background-color: transparent;
+  span {
+    display: none;
+  }
 }
 
 main p {
   padding: 1em;
 }
 
-p.created_by{
-  padding-top: 0em;
-  margin-top: 0em;
-}
-
-article.story {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+div.container {
   max-width: 80%;
 
-  div.entry {
-    scroll-snap-align: start;
-    // Note: scroll snap stop is not supported in all browsers.
-    scroll-snap-stop: always;
+  div.page {
+    min-height: 90vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh;
   }
 }
 
@@ -36,7 +28,7 @@ section.top_contributions {
   align-items: center;
   div {
     margin: 1em;
-    max-width: 25%;
+    max-width: 30%;
     display: flex;
     flex-direction: column;
 
@@ -67,29 +59,4 @@ section.new_contribution {
 #entry_3 {
   display: flex;
   flex-direction: row;
-}
-
-// Styles for view_contributions page
-
-section.contributions {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  flex-wrap: wrap;
-  max-width: 90%;
-
-  div {
-    margin: 1em;
-    width: 400px;
-    display: flex;
-    flex-direction: column;
-
-    button {
-      margin-top: 2em;
-    }
-  }
-}
-
-button#back {
-  padding: 1em;
 }

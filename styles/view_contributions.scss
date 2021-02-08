@@ -1,0 +1,22 @@
+section.contributions {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 90%;
+
+  div {
+    margin: 1em;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+
+    button {
+      margin-top: 2em;
+    }
+  }
+}
+
+button#back {
+  padding: 1em;
+}
