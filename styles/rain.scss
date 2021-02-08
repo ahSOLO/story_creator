@@ -1,0 +1,77 @@
+// Original code retrieved from: https://codepen.io/arickle/pen/XKjMZY
+
+div.rainwrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+}
+
+.rain {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.rain.back-row {
+  z-index: 1;
+  bottom: 60px;
+  opacity: 0.5;
+}
+
+body.back-row-toggle .rain.back-row {
+  display: block;
+}
+
+.drop {
+  position: absolute;
+  bottom: 100%;
+  width: 15px;
+  height: 120px;
+  pointer-events: none;
+  animation: drop 0.5s linear infinite;
+}
+
+@keyframes drop {
+  0% {
+    transform: translateY(0vh);
+  }
+  75% {
+    transform: translateY(90vh);
+  }
+  100% {
+    transform: translateY(90vh);
+  }
+}
+
+.stem {
+  width: 3px;
+  height: 60%;
+  margin-left: 7px;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.055), rgba(99, 211, 255, 0.788));
+  animation: stem 0.5s linear infinite;
+}
+
+@keyframes stem {
+  0% {
+    opacity: 1;
+  }
+  65% {
+    opacity: 1;
+  }
+  75% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.back-row-toggle {
+  top: 90px;
+  line-height: 12px;
+  padding-top: 14px;
+}

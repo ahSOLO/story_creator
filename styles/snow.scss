@@ -1,4 +1,4 @@
-// Code for snow animations was obtained from the following codepen: https://codepen.io/keithclark/pen/yBcsr
+// Original code retrieved from: https://codepen.io/keithclark/pen/yBcsr
 
 $d: 45;      // density
 $w: 600;     // grid size
@@ -19,6 +19,14 @@ $grad: ();
 }
 
 // The CSS
+.snowwrapper {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+}
+
 .snow, .snow:before, .snow:after {
   position: absolute;
   top: -$w + px;
