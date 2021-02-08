@@ -1,3 +1,7 @@
+html {
+  scroll-snap-type: y proximity;
+}
+
 main p {
   padding: 1em;
 }
@@ -13,12 +17,13 @@ article.story {
   align-items: center;
   max-width: 80%;
 
-  div {
+  div.entry {
+    scroll-snap-align: start;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    margin-top: 1em;
-    margin-bottom: 3em;
+    height: 100vh;
   }
 }
 
