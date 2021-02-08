@@ -8,5 +8,6 @@ CREATE TABLE stories (
   title TEXT NOT NULL,
   description TEXT NOT NULL,
   first_entry TEXT NOT NULL,
+  featured BOOLEAN NOT NULL DEFAULT FALSE,
   created_at TIMESTAMP NOT NULL DEFAULT NOW()
 );

@@ -11,7 +11,9 @@
   <div class="intro_scroll">
     <p id="title">Your Story</p>
     <p>Collaborative story-telling made simple.</p>
-    <button class="create_story">Create a Story</button>
+    <form action="/stories/create_story" method="GET">
+      <button class="create_story">Create a Story</button>
+    </form>
     <br><br>
     <i class="fas fa-angle-double-down"></i>
   </div>
@@ -20,21 +22,15 @@
     <div class="featured_stories">
       <h1>Featured Stories</h1>
       <section class="featured">
-        <div>
-          <img src="http://placeimg.com/400/300/arch">
-          <a href=""><h3>Story Title</h3></a>
-          <p>In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum.</p>
-        </div>
-        <div>
-          <img src="http://placeimg.com/400/300/any">
-          <a href=""><h3>Story Title</h3></a>
-          <p>In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum.</p>
-        </div>
-        <div>
-          <img src="http://placeimg.com/400/300/nature">
-          <a href=""><h3>Story Title</h3></a>
-          <p>In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum.</p>
-        </div>
+        <% for (let story in stories) { %>
+          <% if (stories[story]["featured"]) { %>
+            <div>
+              <img src='<%= stories[story]["photo_url"] %>' height="300" width="400">
+              <a href=""><h3><%= stories[story]["title"] %></h3></a>
+              <p><%= stories[story]["description"] %></p>
+            </div>
+          <% } %>
+        <% } %>
       </section>
     </div>
     <br>
@@ -46,43 +42,25 @@
           <th>Title</th>
           <th>Description</th>
           <th>Status</th>
-          <th>Author(s)</th>
+          <th>Creator</th>
         </tr>
-        <tr>
-          <td class="title">
-          <a href="">My Story Title</a>
-          </td>
-          <td>This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. </td>
-          <td>Complete</td>
-          <td>Author One, Author Two, Author Three, Author Four, Author Five</td>
-        </tr>
-        <tr>
-          <td class="title">
-            <a href="">My Story Title</a>
-          </td>
-          <td>This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. </td>
-          <td>In Progress</td>
-          <td>Author One, Author Two, Author Three, Author Four, Author Five</td>
-        </tr>
-        <tr>
-          <td class="title">
-            <a href="">My Story Title. Long title long title long title long title long title.</a>
-          </td>
-          <td>This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. </td>
-          <td>Complete</td>
-          <td>Author One, Author Two, Author Three, Author Four, Author Five</td>
-        </tr>
-        <tr>
-          <td class="title">
-            <a href="">My Story Title</a>
-          </td>
-          <td>This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. </td>
-          <td>Complete</td>
-          <td>Author One, Author Two, Author Three, Author Four, Author Five</td>
-        </tr>
+        <% for (let story in stories) { %>
+          <tr>
+            <td class="title">
+            <a href=""><%= stories[story]["title"] %></a>
+            </td>
+            <td><%= stories[story]["description"] %></td>
+            <td><%= stories[story]["status"] %></td>
+            <td><%= stories[story]["creator"] %></td>
+          </tr>
+        <% } %>
       </table>
     </div>
     <br><br>
   </main>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>
