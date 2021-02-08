@@ -34,20 +34,46 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require("./routes/users");
-const widgetsRoutes = require("./routes/widgets");
+const storyRoutes = require("./routes/stories");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/api/users", usersRoutes(db));
-app.use("/api/widgets", widgetsRoutes(db));
+app.use("/stories", storyRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 
 // Home page
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
+// This one doesn't use Express router
+
+// This route renders the home page
 app.get("/", (req, res) => {
-  res.render("view_story");
+
+  const queryString = `
+  SELECT s.*, u.name as creator, p.photo_url
+  FROM stories s
+  LEFT JOIN users u
+  ON s.creator_id = u.id
+  LEFT JOIN photos p
+  ON s.cover_photo_id = p.id
+  `;
+
+  db.query(queryString)
+  .then((data) => {
+    const stories = data.rows;
+    const templateVars = {
+      stories
+    };
+    res.render("front_page", templateVars);
+  })
+  .catch(err => {
+    res
+      .status(500)
+      .json({ error: err.message });
+  });
+
 });
 
 app.listen(PORT, () => {

@@ -10,4 +10,6 @@ VALUES ('https://imgur.com/eVtUlZJ.jpg', 'happy'),
 ('https://i.imgur.com/B1nxr7x.jpg', 'mysterious'),
 ('https://i.imgur.com/EGURzBM.jpg', 'mysterious'),
 ('https://i.imgur.com/kEy4I5Y.jpg', 'mysterious'),
-('https://i.imgur.com/OLD3asb.jpg', 'mysterious');
+('https://i.imgur.com/OLD3asb.jpg', 'mysterious'),
+('https://i.imgur.com/bE3SAWJ.jpg', NULL),
+('https://i.imgur.com/iQB8ahO.jpg', NULL);
