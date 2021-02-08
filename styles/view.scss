@@ -19,6 +19,8 @@ article.story {
 
   div.entry {
     scroll-snap-align: start;
+    // Note: scroll snap stop is not supported in all browsers.
+    scroll-snap-stop: always;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -30,9 +32,10 @@ article.story {
 section.top_contributions {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   div {
+    margin: 1em;
     max-width: 25%;
     display: flex;
     flex-direction: column;
