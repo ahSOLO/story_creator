@@ -7,30 +7,30 @@ $(() => {
     let current = pageNum
     pageNum = Math.min(pageNum + 1, pages.length - 1);
     if (current !== pageNum) {
-      pages.eq(current).hide( () => {
+      return pages.eq(current).fadeOut(600, () => {
         console.log(pages.eq(pageNum));
-        pages.eq(pageNum).show( () => {
+        pages.eq(pageNum).fadeIn(600, () => {
           detectScroll();
         });
       });
-    } else {
-      detectScroll();
     }
+    return detectScroll();
   };
 
   const scrollUp = function() {
-    let current = pageNum
-    pageNum = Math.max(pageNum - 1, 0);
-    if (current !== pageNum) {
-      pages.eq(current).hide( () => {
-        console.log(pages.eq(pageNum));
-        pages.eq(pageNum).show( () => {
-          detectScroll();
+    if (pageYOffset === 0) {
+      let current = pageNum
+      pageNum = Math.max(pageNum - 1, 0);
+      if (current !== pageNum) {
+        return pages.eq(current).fadeOut(600, () => {
+          console.log(pages.eq(pageNum));
+          pages.eq(pageNum).fadeIn(600, () => {
+            detectScroll();
+          });
         });
-      });
-    } else {
-      detectScroll();
+      }
     }
+    return detectScroll();
   };
 
   const detectScroll = () => {
