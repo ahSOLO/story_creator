@@ -9,8 +9,8 @@
 <body>
   <%- include('partials/_header')  %>
   <main>
-    <h2>Story Title Here</h2>
-    <p class="description">This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. </p>
+    <h2><%= contributions[0]["title"] %></h2>
+    <p class="description"><%= contributions[0]["description"] %></p>
     <form class="update_description" method="POST">
       <textarea name="description" id="description" rows="2" cols="100"></textarea>
       <button type="submit">Update Description</button>
@@ -23,42 +23,17 @@
         <th class="upvotes">Upvotes</th>
         <th></th>
       </tr>
-      <tr>
-        <td>Once upon a time there was contribution text. Once upon a time there was contribution text. Once upon a time there was contribution text. Once upon a time there was contribution text. Maybe we only show the first few sentences?...</td>
-        <td>Author Author</td>
-        <td class="upvotes">72</td>
-        <td>
-          <button class="preview">Preview</button>
-          <button class="accept">Accept</button>
-        </td>
-      </tr>
-      <tr>
-        <td>Once upon a time there was contribution text. Once upon a time there was contribution text. Once upon a time there was contribution text. Once upon a time there was contribution text. Maybe we only show the first few sentences?...</td>
-        <td>Author Author</td>
-        <td class="upvotes">72</td>
-        <td>
-          <button class="preview">Preview</button>
-          <button class="accept">Accept</button>
-        </td>
-      </tr>
-      <tr>
-        <td>Once upon a time there was contribution text. Once upon a time there was contribution text. Once upon a time there was contribution text. Once upon a time there was contribution text. Maybe we only show the first few sentences?...</td>
-        <td>Author Author</td>
-        <td class="upvotes">72</td>
-        <td>
-          <button class="preview">Preview</button>
-          <button class="accept">Accept</button>
-        </td>
-      </tr>
-      <tr>
-        <td>Once upon a time there was contribution text. Once upon a time there was contribution text. Once upon a time there was contribution text. Once upon a time there was contribution text. Maybe we only show the first few sentences?...</td>
-        <td>Author Author</td>
-        <td class="upvotes">72</td>
-        <td>
-          <button class="preview">Preview</button>
-          <button class="accept">Accept</button>
-        </td>
-      </tr>
+      <% for (let contribution in contributions) { %>
+        <tr>
+          <td><%= contributions[contribution]["content"] %></td>
+          <td><%= contributions[contribution]["name"] %></td>
+          <td class="upvotes"><%= contributions[contribution]["upvotes"] %></td>
+          <td>
+            <button class="preview">Preview</button>
+            <button class="accept">Accept</button>
+          </td>
+        </tr>
+      <% } %>
     </table>
     <h2>Complete Story</h2>
     <div class="complete_story">

@@ -10,7 +10,35 @@ module.exports = (db) => {
 
   // render the "Edit Story" page for story_id
   router.get("/edit/:storyID", (req, res) => {
-    res.render("edit_stories");
+
+    const storyID = req.params.storyID;
+    const queryString = `
+    SELECT s.*, c.content, u.name, count(distinct v.id) as upvotes
+    FROM stories s
+    LEFT JOIN contributions c
+    ON s.id = c.story_id AND c.status = 'pending'
+    LEFT JOIN users u
+    ON c.contributor_id = u.id
+    LEFT JOIN upvotes v
+    ON c.id = v.contribution_id
+    WHERE s.id = ${storyID}
+    GROUP BY s.id, c.content, u.name;
+    `;
+
+    db.query(queryString)
+    .then((data) => {
+      const contributions = data.rows;
+      const templateVars = {
+        contributions
+      };
+      res.render("edit_stories", templateVars);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+
   });
 
   // render the "My Stories" page for user_id
