@@ -57,7 +57,7 @@ app.get("/", (req, res) => {
   LEFT JOIN users u
   ON s.creator_id = u.id
   LEFT JOIN photos p
-  ON s.cover_photo_id = p.id
+  ON s.photo_id = p.id
   `;
 
   db.query(queryString)
