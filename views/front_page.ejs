@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/_head')  %>
+  <!-- Page-specific -->
+  <title>Your Story</title>
+  <link rel="stylesheet" href="/styles/front_page.css" type="text/css" />
+</head>
+<body>
+  <%- include('partials/_header')  %>
+  <!-- Will need to remove /public from background image url in scss files when translating into a template -->
+  <div class="intro_scroll">
+    <p id="title">Your Story</p>
+    <p>Collaborative story-telling made simple.</p>
+    <button class="create_story">Create a Story</button>
+    <br><br>
+    <i class="fas fa-angle-double-down"></i>
+  </div>
+  <main>
+    <br>
+    <div class="featured_stories">
+      <h1>Featured Stories</h1>
+      <section class="featured">
+        <div>
+          <img src="http://placeimg.com/400/300/arch">
+          <a href=""><h3>Story Title</h3></a>
+          <p>In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum.</p>
+        </div>
+        <div>
+          <img src="http://placeimg.com/400/300/any">
+          <a href=""><h3>Story Title</h3></a>
+          <p>In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum.</p>
+        </div>
+        <div>
+          <img src="http://placeimg.com/400/300/nature">
+          <a href=""><h3>Story Title</h3></a>
+          <p>In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum.</p>
+        </div>
+      </section>
+    </div>
+    <br>
+    <div class="all_stories">
+
+      <h1>All Stories</h1>
+      <table class="stories">
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Status</th>
+          <th>Author(s)</th>
+        </tr>
+        <tr>
+          <td class="title">
+          <a href="">My Story Title</a>
+          </td>
+          <td>This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. </td>
+          <td>Complete</td>
+          <td>Author One, Author Two, Author Three, Author Four, Author Five</td>
+        </tr>
+        <tr>
+          <td class="title">
+            <a href="">My Story Title</a>
+          </td>
+          <td>This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. </td>
+          <td>In Progress</td>
+          <td>Author One, Author Two, Author Three, Author Four, Author Five</td>
+        </tr>
+        <tr>
+          <td class="title">
+            <a href="">My Story Title. Long title long title long title long title long title.</a>
+          </td>
+          <td>This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. </td>
+          <td>Complete</td>
+          <td>Author One, Author Two, Author Three, Author Four, Author Five</td>
+        </tr>
+        <tr>
+          <td class="title">
+            <a href="">My Story Title</a>
+          </td>
+          <td>This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. </td>
+          <td>Complete</td>
+          <td>Author One, Author Two, Author Three, Author Four, Author Five</td>
+        </tr>
+      </table>
+    </div>
+    <br><br>
+  </main>
+</body>
+</html>

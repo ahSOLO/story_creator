@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/_head')  %>
+  <!-- Page-specific -->
+  <title>Create a Story</title>
+  <link rel="stylesheet" href="/styles/create.css" type="text/css" />
+</head>
+<body>
+  <%- include('partials/_header')  %>
+  <main>
+    <form class="create_entry" method="POST" action="">
+      <h1>Story Creation</h1>
+      <div class="form_grid">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title">
+        <label for="description">Description</label>
+        <textarea id="description" name="description"></textarea>
+        <label for="entry">Begin your story...</label>
+        <textarea id="entry" name="entry"></textarea>
+      </div>
+      <h3>Animation Effects</h3>
+      <div class="button_row">
+        <button id="no_anim">None</button>
+        <button id="rain_anim">Rain</button>
+        <button id="snow_anim">Snow</button>
+        <button id="fog_anim">Fog</button>
+      </div>
+      <h3>Sound Effects</h3>
+      <div class="button_row">
+        <button id="no_sound">None</button>
+        <button id="nature_sound">Nature</button>
+        <button id="storm_sound">Storm</button>
+        <button id="city_sound">City</button>
+      </div>
+      <h3>Suggested Photos</h3>
+      <section class="suggested_photos">
+        <img src="http://placeimg.com/400/300/arch">
+        <img src="http://placeimg.com/400/300/nature">
+        <img src="http://placeimg.com/400/300/tech">
+        <img src="http://placeimg.com/400/300/any">
+      </section>
+      <br><br>
+      <div class="button_spaced">
+        <button id="preview">Preview</button>
+        <button type="submit" id="save"><b>Save your Story</b></button>
+      </div>
+    </form>
+    <br><br>
+  </main>
+</body>
+</html>
