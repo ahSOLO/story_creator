@@ -18,19 +18,37 @@
   integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
   crossorigin="anonymous"></script>
   <script src="https://kit.fontawesome.com/2fff5f5ee5.js" crossorigin="anonymous"></script>
+  <script src="/public/scripts/nav.js" crossorigin="anonymous"></script>
   <!-- Page-specific (remove '/public' when using as template)-->
   <title>View Stories</title>
   <link rel="stylesheet" href="/public/styles/view_story.css" type="text/css" />
+  <link rel="stylesheet" href="/public/styles/snow.css" type="text/css" />
+  <link rel="stylesheet" href="/public/styles/fog.css" type="text/css" />
+  <link rel="stylesheet" href="/public/styles/rain.css" type="text/css" />
   <script type="text/javascript" src="/public/scripts/story.js"></script>
 </head>
 <body>
   <header>
-    <i class="fas fa-align-justify"></i>
+    <i id="open_nav" class="fas fa-align-justify"></i>
     <span>Your Story</span>
     <!-- for muted sound icon use "fas fa-volume-mute"></i> -->
     <i class="fas fa-volume-up"></i>
   </header>
-  <nav></nav>
+  <nav>
+    <span id="close_nav">X</span>
+    <div class="nav-top">
+      <p><b>Logged in as: Username</b></p>
+      <br>
+      <button class="create_story"><b>Create a Story</b></button>
+    </div>
+    <div class="nav-bottom">
+      <a href=""><p>Home Page</p></a>
+      <a href=""><p>Featured Stories</p></a>
+      <a href=""><p>Profile</p></a>
+      <a href=""><p>My Stories</p></a>
+      <a href=""><p>My Contributions</p></a>
+    </div>
+  </nav>
   <main>
     <div class="container">
       <div class="page" id="title">
@@ -40,14 +58,41 @@
         <br>
       </div>
       <div class="page" id="entry_1">
+        <!-- Example of how to add snow animation -->
+        <div class="snowwrapper">
+          <div class="snow"></div>
+        </div>
+        <!-- End of snow animation code-->
         <img src="http://placeimg.com/640/480/arch">
         <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
       </div>
       <div class="page" id="entry_2">
+        <!-- Example of how to add fog animation -->
+        <div class="fogwrapper">
+          <div id="foglayer_01" class="fog">
+            <div class="fog_image01"></div>
+            <div class="fog_image02"></div>
+          </div>
+          <div id="foglayer_02" class="fog">
+            <div class="fog_image01"></div>
+            <div class="fog_image02"></div>
+          </div>
+          <div id="foglayer_03" class="fog">
+            <div class="fog_image01"></div>
+            <div class="fog_image02"></div>
+          </div>
+        </div>
+        <!-- End of fog animation code -->
         <img src="http://placeimg.com/640/480/nature">
         <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
       </div>
       <div class="page" id="entry_3">
+        <!-- Example of how to add rain animation -->
+        <div class="rainwrapper">
+          <div class="rain front-row"></div>
+          <div class="rain back-row"></div>
+        </div>
+        <!-- End of rain animation code -->
         <img src="http://placeimg.com/640/480/people">
         <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
       </div>
