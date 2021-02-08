@@ -11,6 +11,10 @@ header {
   position: fixed;
   width: 100%;
 
+  i {
+    cursor: pointer;
+  }
+
   span {
     font-size: 1.6em;
   }
