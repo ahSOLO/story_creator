@@ -5,57 +5,63 @@
   <!-- Page-specific -->
   <title>Your Story</title>
   <link rel="stylesheet" href="/styles/front_page.css" type="text/css" />
+  <script src="/scripts/front_page.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <%- include('partials/_header')  %>
+  <div class="intro_fixed">
+  </div>
   <div class="intro_scroll">
     <p id="title">Your Story</p>
     <p>Collaborative story-telling made simple.</p>
     <form action="/stories/create_story" method="GET">
       <button class="create_story">Create a Story</button>
     </form>
-    <br><br>
     <i class="fas fa-angle-double-down"></i>
   </div>
   <main>
     <br>
-    <div class="featured_stories" id="featured_stories_section">
-      <h1>Featured Stories</h1>
-      <section class="featured">
-        <% for (let story in stories) { %>
-          <% if (stories[story]["featured"]) { %>
-            <div>
-              <img src='<%= stories[story]["photo_url"] %>'>
-              <a href=""><h3><%= stories[story]["title"] %></h3></a>
-              <p><%= stories[story]["description"] %></p>
-            </div>
+    <div class="container_1">
+      <div class="featured_stories" id="featured_stories_section">
+        <h1>Featured Stories</h1>
+        <section class="featured">
+          <% for (let story in stories) { %>
+            <% if (stories[story]["featured"]) { %>
+              <div>
+                <img src='<%= stories[story]["photo_url"] %>'>
+                <a href=""><h3><%= stories[story]["title"] %></h3></a>
+                <p><%= stories[story]["description"] %></p>
+              </div>
+            <% } %>
           <% } %>
-        <% } %>
-      </section>
+        </section>
+        <br><br>
+      </div>
     </div>
-    <br>
-    <div class="all_stories">
-      <h1>All Stories</h1>
-      <table class="stories">
-        <tr>
-          <th>Title</th>
-          <th>Description</th>
-          <th>Status</th>
-          <th>Creator</th>
-        </tr>
-        <% for (let story in stories) { %>
+    <div class="container_2">
+      <div class="all_stories">
+        <h1>All Stories</h1>
+        <table class="stories">
           <tr>
-            <td class="title">
-              <a href=""><%= stories[story]["title"] %></a>
-            </td>
-            <td><%= stories[story]["description"] %></td>
-            <td><%= stories[story]["status"] %></td>
-            <td><%= stories[story]["creator"] %></td>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Status</th>
+            <th>Creator</th>
           </tr>
-        <% } %>
-      </table>
+          <% for (let story in stories) { %>
+            <tr>
+              <td class="title">
+                <a href=""><%= stories[story]["title"] %></a>
+              </td>
+              <td><%= stories[story]["description"] %></td>
+              <td><%= stories[story]["status"] %></td>
+              <td><%= stories[story]["creator"] %></td>
+            </tr>
+          <% } %>
+        </table>
+      </div>
+      <br><br><br>
     </div>
-    <br><br>
   </main>
 </body>
 </html>
