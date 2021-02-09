@@ -23,10 +23,10 @@
           <td class="title">
             <%= stories[story]["title"] %>
             <br>
-            <form action="/stories/view/story_id/<%= stories[story]['id'] %>" method="GET">
+            <form action="/stories/<%= stories[story]['id'] %>/view" method="GET">
               <button>View</button>
             </form>
-            <form action="/stories/edit/<%= stories[story]['id'] %>" method="GET">
+            <form action="/stories/<%= stories[story]['id'] %>/edit" method="GET">
               <button>Edit</button>
             </form>
           </td>

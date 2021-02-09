@@ -4,48 +4,8 @@ const helpers = require('../helpers');
 
 module.exports = (db) => {
 
-  // render the "My Stories" page for user_id
-  router.get("/list/user_id/:userID", (req, res) => {
-
-    const userID = req.session["user_id"];
-    let user;
-
-    const queryString = `
-    SELECT s.*, creator.name as creator, ', ' || string_agg(u.name, ', ') as contributors
-    FROM stories s
-    LEFT JOIN users creator
-    ON s.creator_id = creator.id
-    LEFT JOIN contributions c
-    ON s.id = c.story_id AND c.status = 'accepted'
-    LEFT JOIN users u
-    ON c.contributor_id = u.id
-    WHERE s.creator_id = ${req.params.userID}
-    GROUP BY s.id, creator.name;
-    `;
-
-    helpers.getUserWithID(userID)
-    .then((data) => {
-      user = data;
-      return db.query(queryString);
-    })
-    .then((data) => {
-      const stories = data.rows
-      templateVars = {
-        stories,
-        user
-      };
-      res.render("my_stories", templateVars);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-
-  });
-
   // render the "View Story" page for story_id
-  router.get("/view/story_id/:storyID", (req, res) => {
+  router.get("/:storyID/view", (req, res) => {
 
     const userID = req.session["user_id"];
     let user;
@@ -99,12 +59,12 @@ module.exports = (db) => {
   });
 
   // render the "View Contributions" page for story_id
-  router.get("/view_contributions/story_id/:storyID", (req, res) => {
+  router.get("/:storyID/view_contributions", (req, res) => {
     res.render("view_contributions");
   });
 
   // render the "Create Contribution" page for story_id
-  router.get("/create_contribution/story_id/:storyID", (req, res) => {
+  router.get("/:storyID/create_contribution", (req, res) => {
     res.render("create_contribution");
   });
 

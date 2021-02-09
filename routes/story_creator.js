@@ -42,7 +42,7 @@ module.exports = (db) => {
     db.query(queryString, queryParams)
     .then((data) => {
       const storyID = data.rows[0]["id"];
-      res.redirect(`/stories/edit/${storyID}`);
+      res.redirect(`/stories/${storyID}/edit`);
     })
     .catch(err => {
       res

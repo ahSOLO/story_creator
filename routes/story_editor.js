@@ -5,7 +5,7 @@ const helpers = require('../helpers');
 module.exports = (db) => {
 
   // render the "Edit Story" page for story_id
-  router.get("/edit/:storyID", (req, res) => {
+  router.get("/:storyID/edit", (req, res) => {
 
     const userID = req.session["user_id"];
     let user;
@@ -46,7 +46,7 @@ module.exports = (db) => {
   });
 
   // Update story description from the "Edit Story" page
-  router.post("/edit/story_id/:storyID/update_description", (req, res) => {
+  router.post("/:storyID/update_description", (req, res) => {
 
     const storyID = req.params.storyID;
     const description = req.body.description;
@@ -60,7 +60,7 @@ module.exports = (db) => {
 
     db.query(queryString, queryParams)
     .then(() => {
-      res.redirect(`/stories/edit/${storyID}`);
+      res.redirect(`/stories/${storyID}/edit`);
     })
     .catch(err => {
       res
@@ -71,7 +71,7 @@ module.exports = (db) => {
   });
 
   // Accept a contribution from the "Edit Story" page
-  router.post("/edit/story_id/:storyID/contribution_id/:contributionID/accept", (req, res) => {
+  router.post("/:storyID/contributions/:contributionID/accept", (req, res) => {
 
     const storyID = req.params.storyID;
     const contributionID = req.params.contributionID;
@@ -92,7 +92,7 @@ module.exports = (db) => {
     db.query(queryStringOne, [contributionID])
     .then(db.query(queryStringTwo, [storyID]))
     .then(() => {
-      res.redirect(`/stories/edit/${storyID}`);
+      res.redirect(`/stories/${storyID}/edit`);
     })
     .catch(err => {
       res
@@ -103,7 +103,7 @@ module.exports = (db) => {
   });
 
   // Complete story from the "Edit Story" page
-  router.post("/edit/story_id/:storyID/complete", (req, res) => {
+  router.post("/:storyID/complete", (req, res) => {
 
     const storyID = req.params.storyID;
 
@@ -115,7 +115,7 @@ module.exports = (db) => {
 
     db.query(queryString, [storyID])
     .then(() => {
-      res.redirect(`/stories/edit/${storyID}`);
+      res.redirect(`/stories/${storyID}/edit`);
     })
     .catch(err => {
       res
