@@ -1,5 +1,6 @@
 const express = require('express');
 const router  = express.Router();
+const helpers = require('../helpers');
 
 module.exports = (db) => {
 
@@ -8,16 +9,6 @@ module.exports = (db) => {
 
     const userID = req.session["user_id"];
     let user;
-    let queryGetUser;
-    if (userID) {
-      queryGetUser = `
-      SELECT name
-      FROM users
-      WHERE id = ${userID};
-      `;
-    } else {
-      queryGetUser = 'SELECT null;'
-    }
 
     const queryString = `
     SELECT s.*, creator.name as creator, ', ' || string_agg(u.name, ', ') as contributors
@@ -32,9 +23,9 @@ module.exports = (db) => {
     GROUP BY s.id, creator.name;
     `;
 
-    db.query(queryGetUser)
+    helpers.getUserWithID(userID)
     .then((data) => {
-      user = data.rows[0];
+      user = data;
       return db.query(queryString);
     })
     .then((data) => {
@@ -58,16 +49,6 @@ module.exports = (db) => {
 
     const userID = req.session["user_id"];
     let user;
-    let queryGetUser;
-    if (userID) {
-      queryGetUser = `
-      SELECT name
-      FROM users
-      WHERE id = ${userID};
-      `;
-    } else {
-      queryGetUser = 'SELECT null;'
-    }
 
     let entries;
     let pendingContributions;
@@ -96,9 +77,9 @@ module.exports = (db) => {
     ORDER BY COUNT(upvotes)
     LIMIT 3;`;
 
-    db.query(queryGetUser)
+    helpers.getUserWithID(userID)
     .then((data) => {
-      user = data.rows[0];
+      user = data;
       return db.query(queryString1, queryParams);
     })
     .then((data) => {

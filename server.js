@@ -38,6 +38,9 @@ const storyCreatorRoutes = require("./routes/story_creator");
 const storyEditorRoutes = require("./routes/story_editor");
 const storyViewerRoutes = require("./routes/story_viewer");
 
+// Import helper functions
+const helpers = require('./helpers');
+
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/", userRoutes(db));
@@ -57,16 +60,6 @@ app.get("/", (req, res) => {
 
   const userID = req.session["user_id"];
   let user;
-  let queryGetUser;
-  if (userID) {
-    queryGetUser = `
-    SELECT id as user_id, name
-    FROM users
-    WHERE id = ${userID};
-    `;
-  } else {
-    queryGetUser = 'SELECT null;'
-  }
 
   const queryString = `
   SELECT s.*, u.name as creator, p.photo_url
@@ -77,9 +70,9 @@ app.get("/", (req, res) => {
   ON s.photo_id = p.id
   `;
 
-  db.query(queryGetUser)
+  helpers.getUserWithID(userID)
   .then((data) => {
-    user = data.rows[0];
+    user = data;
     return db.query(queryString);
   })
   .then((data) => {
