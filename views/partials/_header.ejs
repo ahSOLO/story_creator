@@ -7,15 +7,21 @@
 <nav>
   <span id="close_nav">X</span>
   <div class="nav-top">
-    <p><b>Logged in as: Username</b></p>
+    <% if (user.name) { %>
+      <p><b>Logged in as: <%= user.name %></b></p>
+    <% } else { %>
+      <p><b>Not Logged In</b></p>
+    <% } %>
     <br>
-    <button class="create_story"><b>Create a Story</b></button>
+    <form action="/stories/create_story" method="GET">
+      <button class="create_story">Create a Story</button>
+    </form>
   </div>
   <div class="nav-bottom">
-    <a href=""><p>Home Page</p></a>
-    <a href=""><p>Featured Stories</p></a>
+    <a href="/"><p>Home Page</p></a>
+    <a href="/#featured_stories_section"><p>Featured Stories</p></a>
     <a href=""><p>Profile</p></a>
-    <a href=""><p>My Stories</p></a>
+    <a href="/stories/list/user_id/<%= user.user_id %>"><p>My Stories</p></a>
     <a href=""><p>My Contributions</p></a>
   </div>
 </nav>

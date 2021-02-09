@@ -6,6 +6,19 @@ module.exports = (db) => {
   // render the "Edit Story" page for story_id
   router.get("/edit/:storyID", (req, res) => {
 
+    const userID = req.session["user_id"];
+    let user;
+    let queryGetUser;
+    if (userID) {
+      queryGetUser = `
+      SELECT id as user_id, name
+      FROM users
+      WHERE id = ${userID};
+      `;
+    } else {
+      queryGetUser = 'SELECT null;'
+    }
+
     const storyID = req.params.storyID;
     const queryString = `
     SELECT s.*, c.id as contribution_id, c.content, u.name, count(distinct v.id) as upvotes
@@ -20,11 +33,16 @@ module.exports = (db) => {
     GROUP BY s.id, c.id, c.content, u.name;
     `;
 
-    db.query(queryString)
+    db.query(queryGetUser)
+    .then((data) => {
+      user = data.rows[0];
+      return db.query(queryString);
+    })
     .then((data) => {
       const contributions = data.rows;
       const templateVars = {
-        contributions
+        contributions,
+        user
       };
       res.render("edit_stories", templateVars);
     })
