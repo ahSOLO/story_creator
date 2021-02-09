@@ -50,7 +50,6 @@ app.use("/stories", storyRoutes(db));
 
 // This route renders the home page
 app.get("/", (req, res) => {
-
   const queryString = `
   SELECT s.*, u.name as creator, p.photo_url
   FROM stories s

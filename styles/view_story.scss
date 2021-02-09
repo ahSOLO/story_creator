@@ -9,6 +9,10 @@ main p {
   padding: 1em;
 }
 
+img {
+  max-width: 640px;
+}
+
 div.container {
   max-width: 80%;
 
@@ -25,7 +29,7 @@ section.top_contributions {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   div {
     margin: 1em;
     max-width: 30%;
@@ -60,3 +64,14 @@ section.new_contribution {
   display: flex;
   flex-direction: row;
 }
+
+#entry_5 {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+#entry_6 {
+  display: flex;
+  flex-direction: row;
+}
+
