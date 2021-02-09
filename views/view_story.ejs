@@ -19,9 +19,9 @@
         <img src="<%= entries[0].creator_photo %>">
         <h1>Story Title</h1>
         <p><b>By:</b> <%= entries[0].creator %> <% for (const [index, entry] of Object.entries(entries)) {%>
-          <% if(index >= entries.length - 1) { %>
+          <% if(index >= entries.length - 1 && (entry.contributor)) { %>
           <%=", and " + entry.contributor %>
-          <% } else { %>
+          <% } else if (entry.contributor) { %>
           <%=", " + entry.contributor%>
           <% }} %></p>
         <br>
@@ -58,38 +58,40 @@
         <data id="entry_1_sound" value="<%=entries[0].creator_sound%>"></data>
       </div>
       <!-- CONTRIBUTOR ENTRIES -->
-      <% for (const entry of entries) { %>
-        <div class="page" id="entry_<%=entry.ord%>">
-          <% if (entry.contributor_anim === 'rain') { %>
-          <div class="rainwrapper">
-            <div class="rain front-row"></div>
-            <div class="rain back-row"></div>
-          </div>
-        <% } else if (entry.contributor_anim === 'fog') { %>
-          <div class="fogwrapper">
-            <div id="foglayer_01" class="fog">
-              <div class="fog_image01"></div>
-              <div class="fog_image02"></div>
+      <% if (entries[0].contributor) { %>
+        <% for (const entry of entries) { %>
+          <div class="page" id="entry_<%=entry.ord%>">
+            <% if (entry.contributor_anim === 'rain') { %>
+            <div class="rainwrapper">
+              <div class="rain front-row"></div>
+              <div class="rain back-row"></div>
             </div>
-            <div id="foglayer_02" class="fog">
-              <div class="fog_image01"></div>
-              <div class="fog_image02"></div>
+          <% } else if (entry.contributor_anim === 'fog') { %>
+            <div class="fogwrapper">
+              <div id="foglayer_01" class="fog">
+                <div class="fog_image01"></div>
+                <div class="fog_image02"></div>
+              </div>
+              <div id="foglayer_02" class="fog">
+                <div class="fog_image01"></div>
+                <div class="fog_image02"></div>
+              </div>
+              <div id="foglayer_03" class="fog">
+                <div class="fog_image01"></div>
+                <div class="fog_image02"></div>
+              </div>
             </div>
-            <div id="foglayer_03" class="fog">
-              <div class="fog_image01"></div>
-              <div class="fog_image02"></div>
+          <% } else if (entry.contributor_anim === 'snow') { %>
+            <div class="snowwrapper">
+              <div class="snow"></div>
             </div>
-          </div>
-        <% } else if (entry.contributor_anim === 'snow') { %>
-          <div class="snowwrapper">
-            <div class="snow"></div>
+          <% } %>
+            <img src="<%=entry.contributor_photo%>">
+            <p><%=entry.contributor_entry%></p>
+            <data id="entry_<%=entry.ord%>_sound" value="<%=entry.contributor_sound%>"></data>
+            <data id="entry_<%=entry.ord%>_position" value="<%=entry.contributor_position%>"></data>
           </div>
         <% } %>
-          <img src="<%=entry.contributor_photo%>">
-          <p><%=entry.contributor_entry%></p>
-          <data id="entry_<%=entry.ord%>_sound" value="<%=entry.contributor_sound%>"></data>
-          <data id="entry_<%=entry.ord%>_position" value="<%=entry.contributor_position%>"></data>
-        </div>
       <% } %>
       <!-- VOTE ON CONTRIBUTIONS -->
       <div class="page">
