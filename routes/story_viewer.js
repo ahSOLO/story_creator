@@ -10,6 +10,20 @@ module.exports = (db) => {
 
   // render the "View Story" page for story_id
   router.get("/view/story_id/:storyID", (req, res) => {
+
+    const userID = req.session["user_id"];
+    let user;
+    let queryGetUser;
+    if (userID) {
+      queryGetUser = `
+      SELECT name
+      FROM users
+      WHERE id = ${userID};
+      `;
+    } else {
+      queryGetUser = 'SELECT null;'
+    }
+
     let entries;
     let pendingContributions;
     const queryString1 = `
@@ -37,14 +51,18 @@ module.exports = (db) => {
     ORDER BY COUNT(upvotes)
     LIMIT 3;`;
 
-    db.query(queryString1, queryParams)
+    db.query(queryGetUser)
+    .then((data) => {
+      user = data.rows[0];
+      return db.query(queryString1, queryParams);
+    })
     .then((data) => {
       entries = data.rows;
       return db.query(queryString2, queryParams);
     })
     .then((data) => {
       pendingContributions = (data.rows)
-      const templateVars = { entries, pendingContributions, storyID:req.params.storyID };
+      const templateVars = { entries, pendingContributions, storyID:req.params.storyID, user };
       res.render("view_story", templateVars);
     })
     .catch(err => {

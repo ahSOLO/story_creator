@@ -54,6 +54,20 @@ app.use("/stories", storyViewerRoutes(db));
 
 // This route renders the home page
 app.get("/", (req, res) => {
+
+  const userID = req.session["user_id"];
+  let user;
+  let queryGetUser;
+  if (userID) {
+    queryGetUser = `
+    SELECT id as user_id, name
+    FROM users
+    WHERE id = ${userID};
+    `;
+  } else {
+    queryGetUser = 'SELECT null;'
+  }
+
   const queryString = `
   SELECT s.*, u.name as creator, p.photo_url
   FROM stories s
@@ -63,11 +77,16 @@ app.get("/", (req, res) => {
   ON s.photo_id = p.id
   `;
 
-  db.query(queryString)
+  db.query(queryGetUser)
+  .then((data) => {
+    user = data.rows[0];
+    return db.query(queryString);
+  })
   .then((data) => {
     const stories = data.rows;
     const templateVars = {
-      stories
+      stories,
+      user
     };
     res.render("front_page", templateVars);
   })
