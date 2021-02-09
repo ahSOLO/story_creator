@@ -58,16 +58,6 @@ module.exports = (db) => {
     });
   });
 
-  // render the "View Contributions" page for story_id
-  router.get("/:storyID/view_contributions", (req, res) => {
-    res.render("view_contributions");
-  });
-
-  // render the "Create Contribution" page for story_id
-  router.get("/:storyID/create_contribution", (req, res) => {
-    res.render("create_contribution");
-  });
-
   return router;
 
 };

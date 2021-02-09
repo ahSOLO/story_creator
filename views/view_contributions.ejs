@@ -11,40 +11,28 @@
   <main>
     <h2>The Story isn't over... Vote on what happens next!</h2>
     <section class="contributions">
-      <div>
-        <img src="http://placeimg.com/400/300/arch">
-        <button>Upvote</button>
-        <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
-      </div>
-      <div>
-        <img src="http://placeimg.com/400/300/nature">
-        <button>Upvote</button>
-        <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
-      </div>
-      <div>
-        <img src="http://placeimg.com/400/300/tech">
-        <button>Upvote</button>
-        <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
-      </div>
-      <div>
-        <img src="http://placeimg.com/400/300/arch">
-        <button>Upvote</button>
-        <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
-      </div>
-      <div>
-        <img src="http://placeimg.com/400/300/nature">
-        <button>Upvote</button>
-        <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
-      </div>
-      <div>
-        <img src="http://placeimg.com/400/300/tech">
-        <button>Upvote</button>
-        <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
-      </div>
+      <% for (let contribution in contributions) { %>
+        <div>
+          <img src="<%= contributions[contribution]['photo_url'] %>">
+          <form action="/stories/<%= contributions[contribution]['story_id'] %>/contribution/<%= contributions[contribution]['id'] %>/upvote" method="POST">
+            <% if (userVoted.length > 0) { %>
+              <button disabled>Upvote</button>
+              <% if (userVoted[0]['contribution_id'] === contributions[contribution]['id']) { %>
+                <p id="voted">You voted for this one already!</p>
+              <% } %>
+            <% } else { %>
+              <button>Upvote</button>
+            <% } %>
+          </form>
+          <p><%= contributions[contribution]['content'] %></p>
+        </div>
+      <% } %>
     </section>
     <br>
     <section class="back">
-      <button id="back"><b>Back</b> to the Story</button>
+      <form action="/stories/<%= contributions[0]['story_id'] %>/view" method="GET">
+        <button id="back"><b>Back</b> to the Story</button>
+      </form>
       <br><br>
     </section>
   </main>
