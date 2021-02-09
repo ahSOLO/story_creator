@@ -20,25 +20,40 @@
         <textarea id="entry" name="entry"></textarea>
       </div>
       <h3>Animation Effects</h3>
+      <!-- Animation IDs: 1 - rain, 2 - snow, 3 - fog -->
       <div class="button_row">
-        <button id="no_anim">None</button>
-        <button id="rain_anim">Rain</button>
-        <button id="snow_anim">Snow</button>
-        <button id="fog_anim">Fog</button>
+        <input type="radio" id="no_anim" name="animation" checked="checked" value="">
+        <label class="radio" for="no_anim">None</label>
+        <input type="radio" id="rain_anim" name="animation" value="1">
+        <label class="radio" for="rain_anim">Rain</label>
+        <input type="radio" id="snow_anim" name="animation" value="2">
+        <label class="radio" for="snow_anim">Snow</label>
+        <input type="radio" id="fog_anim" name="animation" value="3">
+        <label class="radio" for="fog_anim">Fog</label>
       </div>
       <h3>Sound Effects</h3>
+      <!-- Sound IDs: 1 - nature, 2 - storm, 3 - city -->
       <div class="button_row">
-        <button id="no_sound">None</button>
-        <button id="nature_sound">Nature</button>
-        <button id="storm_sound">Storm</button>
-        <button id="city_sound">City</button>
+        <input type="radio" id="no_sound" name="sound" checked="checked" value="">
+        <label class="radio" for="no_sound">None</label>
+        <input type="radio" id="nature_sound" name="sound" value="1">
+        <label class="radio" for="nature_sound">Nature</label>
+        <input type="radio" id="storm_sound" name="sound" value="2">
+        <label class="radio" for="storm_sound">Storm</label>
+        <input type="radio" id="city_sound" name="sound" value="3">
+        <label class="radio" for="city_sound">City</label>
       </div>
       <h3>Suggested Photos</h3>
       <section class="suggested_photos">
-        <img src="http://placeimg.com/400/300/arch">
-        <img src="http://placeimg.com/400/300/nature">
-        <img src="http://placeimg.com/400/300/tech">
-        <img src="http://placeimg.com/400/300/any">
+        <!-- replace values with suggested photo id from database -->
+        <input class="photo" type="radio" id="photo_1" name="photo" value="2">
+        <label class="photo" for="photo_1"><img src="http://placeimg.com/400/300/arch"></label>
+        <input class="photo" type="radio" id="photo_2" name="photo" value="3">
+        <label class="photo" for="photo_2"><img src="http://placeimg.com/400/300/nature"></label>
+        <input class="photo" type="radio" id="photo_3" name="photo" value="4">
+        <label class="photo" for="photo_3"><img src="http://placeimg.com/400/300/tech"></label>
+        <input class="photo" type="radio" id="photo_4" name="photo" value="5">
+        <label class="photo" for="photo_4"><img src="http://placeimg.com/400/300/any"></label>
       </section>
       <br><br>
       <div class="button_spaced">

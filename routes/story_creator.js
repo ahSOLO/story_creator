@@ -24,14 +24,15 @@ module.exports = (db) => {
 
   // Create a new story.
   router.post("/create_story", (req, res) => {
+    console.log(req.body);
 
     const userID = req.session["user_id"];
     const title = req.body.title;
     const description = req.body.description;
     const firstEntry = req.body.entry;
-    const animation = undefined; // hardcoded. need to update so it takes user selection.
-    const sound = undefined; // hardcoded. need to update so it takes user selection.
-    const photo = 1; // hardcoded. need to update so it takes user selection.
+    const animation = (req.body.animation || null);
+    const sound = (req.body.sound || null);
+    const photo = (req.body.photo || 1); // leaving 1 in as the default photo to be used for all photo-less entries, otherwise we would have to adjust EJS files to accommodate queries with no photos;
     const queryParams = [userID, photo, animation, sound, title, description, firstEntry];
 
     const queryString = `

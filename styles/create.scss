@@ -27,6 +27,11 @@ section.suggested_photos {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1em;
+
+  img {
+    max-width: 400px;
+    max-height: 300px;
+  }
 }
 
 #description {
