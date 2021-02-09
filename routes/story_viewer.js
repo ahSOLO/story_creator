@@ -4,8 +4,53 @@ const router  = express.Router();
 module.exports = (db) => {
 
   // render the "My Stories" page for user_id
-  router.get("/list/", (req, res) => {
-    res.render("my_stories");
+  router.get("/list/user_id/:userID", (req, res) => {
+
+    const userID = req.session["user_id"];
+    let user;
+    let queryGetUser;
+    if (userID) {
+      queryGetUser = `
+      SELECT name
+      FROM users
+      WHERE id = ${userID};
+      `;
+    } else {
+      queryGetUser = 'SELECT null;'
+    }
+
+    const queryString = `
+    SELECT s.*, creator.name as creator, ', ' || string_agg(u.name, ', ') as contributors
+    FROM stories s
+    LEFT JOIN users creator
+    ON s.creator_id = creator.id
+    LEFT JOIN contributions c
+    ON s.id = c.story_id AND c.status = 'accepted'
+    LEFT JOIN users u
+    ON c.contributor_id = u.id
+    WHERE s.creator_id = ${req.params.userID}
+    GROUP BY s.id, creator.name;
+    `;
+
+    db.query(queryGetUser)
+    .then((data) => {
+      user = data.rows[0];
+      return db.query(queryString);
+    })
+    .then((data) => {
+      const stories = data.rows
+      templateVars = {
+        stories,
+        user
+      };
+      res.render("my_stories", templateVars);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+
   });
 
   // render the "View Story" page for story_id

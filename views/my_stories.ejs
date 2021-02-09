@@ -17,61 +17,24 @@
         <th>Status</th>
         <th>Author(s)</th>
       </tr>
-      <tr>
-        <td class="title">
-          My Story Title
-          <br>
-          <button>View</button>
-          <button>Edit</button>
-        </td>
-        <td>This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. </td>
-        <td>Complete</td>
-        <td>Author One, Author Two, Author Three, Author Four, Author Five</td>
-      </tr>
-      <tr>
-        <td class="title">
-          My Story Title This is a Longer Title.
-          <br>
-          <button>View</button>
-          <button>Edit</button>
-        </td>
-        <td>This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. </td>
-        <td>Complete</td>
-        <td>Author One, Author Two, Author Three, Author Four, Author Five</td>
-      </tr>
-      <tr>
-        <td class="title">
-          My Story Title
-          <br>
-          <button>View</button>
-          <button>Edit</button>
-        </td>
-        <td>This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. </td>
-        <td>Complete</td>
-        <td>Author One, Author Two, Author Three, Author Four, Author Five</td>
-      </tr>
-      <tr>
-        <td class="title">
-          My Story Title
-          <br>
-          <button>View</button>
-          <button>Edit</button>
-        </td>
-        <td>This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. </td>
-        <td>Complete</td>
-        <td>Author One, Author Two, Author Three, Author Four, Author Five</td>
-      </tr>
-      <tr>
-        <td class="title">
-          My Story Title This is a Longer Title, This is a very long title.
-          <br>
-          <button>View</button>
-          <button>Edit</button>
-        </td>
-        <td>This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. This is my story description. </td>
-        <td>Complete</td>
-        <td>Author One, Author Two, Author Three, Author Four, Author Five</td>
-      </tr>
+
+      <% for (let story in stories) { %>
+        <tr>
+          <td class="title">
+            <%= stories[story]["title"] %>
+            <br>
+            <form action="/stories/view/story_id/<%= stories[story]['id'] %>" method="GET">
+              <button>View</button>
+            </form>
+            <form action="/stories/edit/<%= stories[story]['id'] %>" method="GET">
+              <button>Edit</button>
+            </form>
+          </td>
+          <td><%= stories[story]["description"] %></td>
+          <td><%= stories[story]["status"] %></td>
+          <td><%= stories[story]["creator"] %><%= stories[story]["contributors"] %></td>
+        </tr>
+      <% } %>
     </table>
     <br><br>
   </main>
