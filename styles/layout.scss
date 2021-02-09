@@ -37,6 +37,14 @@ a {
   text-decoration: none;
 }
 
+a:link, a:visited {
+  color: #1B263B;
+}
+
+a:hover {
+  color: #415A77;
+}
+
 nav {
   font-size: 0.9rem;
   width: 320px;

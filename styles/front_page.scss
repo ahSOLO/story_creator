@@ -54,6 +54,7 @@ div.intro_scroll {
 
 div.container_1 {
   margin-top: 100vh;
+  padding-top: 55px;
   width: 100%;
   background-color: white;
   padding-left: 7%;
@@ -98,7 +99,8 @@ section.featured {
 }
 
 table.stories {
-  background: lightgrey;
+  background: #415A77;
+  color: white;
   padding: 1em;
 
   th {
@@ -120,5 +122,13 @@ table.stories {
       margin-top: 0.5em;
       font-size: 1rem;
     }
+  }
+
+  a:link, a:visited {
+    color: #E0E1DD;
+  }
+
+  a:hover {
+    color: lightblue;
   }
 }
