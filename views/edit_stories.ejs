@@ -11,7 +11,7 @@
   <main>
     <h2><%= contributions[0]["title"] %></h2>
     <p class="description"><%= contributions[0]["description"] %></p>
-    <form class="update_description" method="POST">
+    <form class="update_description" action="/stories/edit/story_id/<%= contributions[0]['id'] %>/update_description" method="POST">
       <textarea name="description" id="description" rows="2" cols="100"></textarea>
       <button type="submit">Update Description</button>
     </form>
@@ -30,7 +30,9 @@
           <td class="upvotes"><%= contributions[contribution]["upvotes"] %></td>
           <td>
             <button class="preview">Preview</button>
-            <button class="accept">Accept</button>
+            <form action="/stories/edit/story_id/<%= contributions[0]['id'] %>/contribution_id/<%= contributions[contribution]['contribution_id'] %>/accept" method="POST">
+              <button class="accept">Accept</button>
+            </form>
           </td>
         </tr>
       <% } %>
@@ -38,7 +40,9 @@
     <h2>Complete Story</h2>
     <div class="complete_story">
       <p>Mark your story as complete. (Warning! This cannot be undone)</p>
-      <button>Complete Story</button>
+      <form action="/stories/edit/story_id/<%= contributions[0]['id'] %>/complete" method="POST">
+        <button>Complete Story</button>
+      </form>
     </div>
     <br><br>
   </main>
