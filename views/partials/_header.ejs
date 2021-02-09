@@ -7,7 +7,7 @@
 <nav>
   <span id="close_nav">X</span>
   <div class="nav-top">
-    <% if (user.name) { %>
+    <% if (user) { %>
       <p><b>Logged in as: <%= user.name %></b></p>
     <% } else { %>
       <p><b>Not Logged In</b></p>
@@ -21,7 +21,11 @@
     <a href="/"><p>Home Page</p></a>
     <a href="/#featured_stories_section"><p>Featured Stories</p></a>
     <a href=""><p>Profile</p></a>
-    <a href="/stories/list/user_id/<%= user.user_id %>"><p>My Stories</p></a>
+    <% if (user) { %>
+    <a href="/users/<%= user.user_id %>/stories"><p>My Stories</p></a>
+    <% } else { %>
+    <a href=""><p>My Stories</p></a>
+    <% } %>
     <a href=""><p>My Contributions</p></a>
   </div>
 </nav>

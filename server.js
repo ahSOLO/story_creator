@@ -10,6 +10,12 @@ const sass       = require("node-sass-middleware");
 const app        = express();
 const morgan     = require('morgan');
 
+const cookieSession = require("cookie-session");
+app.use(cookieSession({
+  name: "session",
+  keys: ["secret-key"]
+}));
+
 // PG database client/connection setup
 const { Pool } = require('pg');
 const dbParams = require('./lib/db.js');
@@ -43,7 +49,7 @@ const helpers = require('./helpers');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/", userRoutes(db));
+app.use("/users", userRoutes(db));
 app.use("/stories", storyCreatorRoutes(db));
 app.use("/stories", storyEditorRoutes(db));
 app.use("/stories", storyViewerRoutes(db));

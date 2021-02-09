@@ -105,13 +105,13 @@
             </div>
           <% } %>
         </section>
-        <form action="/stories/view_contributions/story_id/<%=storyID%>" method="GET">
+        <form action="/<%=storyID%>/view_contributions" method="GET">
           <button id="all_contributions"> See All Contributions</button>
         </form>
         <br>
         <section class="new_contribution">
           <h2>Want your say? Make a new contribution.</h2>
-          <form action="/stories/create_contribution/story_id/<%=storyID%>" method="GET">
+          <form action="/<%=storyID%>/create_contribution" method="GET">
             <button>Contribute to the story</button>
           </form>
           <br><br>
