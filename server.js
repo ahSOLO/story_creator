@@ -43,6 +43,7 @@ const userRoutes = require("./routes/users");
 const storyCreatorRoutes = require("./routes/story_creator");
 const storyEditorRoutes = require("./routes/story_editor");
 const storyViewerRoutes = require("./routes/story_viewer");
+const storyContributionRoutes = require("./routes/story_contributions");
 
 // Import helper functions
 const helpers = require('./helpers');
@@ -53,6 +54,7 @@ app.use("/users", userRoutes(db));
 app.use("/stories", storyCreatorRoutes(db));
 app.use("/stories", storyEditorRoutes(db));
 app.use("/stories", storyViewerRoutes(db));
+app.use("/stories", storyContributionRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 
