@@ -1,5 +1,6 @@
 const express = require('express');
 const router  = express.Router();
+const helpers = require('../helpers');
 
 module.exports = (db) => {
 
@@ -8,16 +9,6 @@ module.exports = (db) => {
 
     const userID = req.session["user_id"];
     let user;
-    let queryGetUser;
-    if (userID) {
-      queryGetUser = `
-      SELECT id as user_id, name
-      FROM users
-      WHERE id = ${userID};
-      `;
-    } else {
-      queryGetUser = 'SELECT null;'
-    }
 
     const storyID = req.params.storyID;
     const queryString = `
@@ -33,9 +24,9 @@ module.exports = (db) => {
     GROUP BY s.id, c.id, c.content, u.name;
     `;
 
-    db.query(queryGetUser)
+    helpers.getUserWithID(userID)
     .then((data) => {
-      user = data.rows[0];
+      user = data;
       return db.query(queryString);
     })
     .then((data) => {
