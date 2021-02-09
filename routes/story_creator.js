@@ -1,11 +1,20 @@
 const express = require('express');
 const router  = express.Router();
+const helpers = require('../helpers');
 
 module.exports = (db) => {
 
   // render the "Create Story" page for user_id
   router.get("/create", (req, res) => {
-    res.render("create_story");
+    const userID = req.session["user_id"];
+    let user;
+
+    helpers.getUserWithID(userID)
+    .then((data) => {
+      user = data;
+      const templateVars = { user };
+      res.render("create_story", templateVars);
+    })
   });
 
   // "Create Story" button on homepage
@@ -33,7 +42,7 @@ module.exports = (db) => {
     db.query(queryString, queryParams)
     .then((data) => {
       const storyID = data.rows[0]["id"];
-      res.redirect(`/stories/edit/${storyID}`);
+      res.redirect(`/stories/${storyID}/edit`);
     })
     .catch(err => {
       res
