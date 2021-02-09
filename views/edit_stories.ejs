@@ -15,35 +15,52 @@
       <textarea name="description" id="description" rows="2" cols="100"></textarea>
       <button type="submit">Update Description</button>
     </form>
-    <h2>Latest Contributions</h2>
-    <table class="contributions">
-      <tr>
-        <th>Text</th>
-        <th>Author</th>
-        <th class="upvotes">Upvotes</th>
-        <th></th>
-      </tr>
-      <% for (let contribution in contributions) { %>
-        <tr>
-          <td><%= contributions[contribution]["content"] %></td>
-          <td><%= contributions[contribution]["name"] %></td>
-          <td class="upvotes"><%= contributions[contribution]["upvotes"] %></td>
-          <td>
-            <button class="preview">Preview</button>
-            <form action="/stories/edit/story_id/<%= contributions[0]['id'] %>/contribution_id/<%= contributions[contribution]['contribution_id'] %>/accept" method="POST">
-              <button class="accept">Accept</button>
-            </form>
-          </td>
-        </tr>
+    <% if (contributions[0]["status"] === 'complete') { %>
+      <br><br>
+      <p>This story is finished! Click <a href="/stories/view/story_id/<%= contributions[0]['id'] %>" style="font-weight:bold">here</a> to view.</p>
+    <% } else { %>
+      <h2>Latest Contributions</h2>
+      <% if (contributions.length > 1) { %>
+        <table class="contributions">
+          <tr>
+            <th>Text</th>
+            <th>Author</th>
+            <th class="upvotes">Upvotes</th>
+            <th></th>
+          </tr>
+          <% for (let contribution in contributions) { %>
+            <tr>
+              <td><%= contributions[contribution]["content"] %></td>
+              <td><%= contributions[contribution]["name"] %></td>
+              <td class="upvotes"><%= contributions[contribution]["upvotes"] %></td>
+              <td>
+                <button class="preview">Preview</button>
+                <form action="/stories/edit/story_id/<%= contributions[0]['id'] %>/contribution_id/<%= contributions[contribution]['contribution_id'] %>/accept" method="POST">
+                  <button class="accept">Accept</button>
+                </form>
+              </td>
+            </tr>
+          <% } %>
+        </table>
+      <% } else { %>
+        <p>There are no pending contributions. All contributions have been accepted.</p>
       <% } %>
-    </table>
-    <h2>Complete Story</h2>
-    <div class="complete_story">
-      <p>Mark your story as complete. (Warning! This cannot be undone)</p>
-      <form action="/stories/edit/story_id/<%= contributions[0]['id'] %>/complete" method="POST">
-        <button>Complete Story</button>
-      </form>
-    </div>
+      <h2>Complete Story</h2>
+      <div class="complete_story">
+        <% if (contributions.length > 1) { %>
+          <p style="color:red;">Accept any pending contributions before completing story.</p>
+        <% } else { %>
+          <p>Mark your story as complete. (Warning! This cannot be undone)</p>
+        <% } %>
+        <form action="/stories/edit/story_id/<%= contributions[0]['id'] %>/complete" method="POST">
+          <% if (contributions.length > 1) { %>
+            <button disabled>Complete Story</button>
+          <% } else { %>
+            <button>Complete Story</button>
+          <% } %>
+        </form>
+      </div>
+    <% } %>
     <br><br>
   </main>
 </body>
