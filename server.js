@@ -34,12 +34,16 @@ app.use(express.static("public"));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const userRoutes = require("./routes/users");
-const storyRoutes = require("./routes/stories");
+const storyCreatorRoutes = require("./routes/story_creator");
+const storyEditorRoutes = require("./routes/story_editor");
+const storyViewerRoutes = require("./routes/story_viewer");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
 app.use("/", userRoutes(db));
-app.use("/stories", storyRoutes(db));
+app.use("/stories", storyCreatorRoutes(db));
+app.use("/stories", storyEditorRoutes(db));
+app.use("/stories", storyViewerRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 
@@ -50,7 +54,6 @@ app.use("/stories", storyRoutes(db));
 
 // This route renders the home page
 app.get("/", (req, res) => {
-
   const queryString = `
   SELECT s.*, u.name as creator, p.photo_url
   FROM stories s

@@ -14,23 +14,26 @@
   <%- include('partials/_header')  %>
   <main>
     <div class="container">
+      <!-- TITLE -->
       <div class="page" id="title">
-        <img src="http://placeimg.com/640/480/any">
+        <img src="<%= entries[0].creator_photo %>">
         <h1>Story Title</h1>
-        <p><b>By:</b> Author 1, Author 2, Author 3, Author 4, Author 5</p>
+        <p><b>By:</b> <%= entries[0].creator %> <% for (const [index, entry] of Object.entries(entries)) {%>
+          <% if(index >= entries.length - 1) { %>
+          <%=", and " + entry.contributor %>
+          <% } else { %>
+          <%=", " + entry.contributor%>
+          <% }} %></p>
         <br>
       </div>
+      <!-- FIRST ENTRY -->
       <div class="page" id="entry_1">
-        <!-- Example of how to add snow animation -->
-        <div class="snowwrapper">
-          <div class="snow"></div>
+        <% if (entries[0].creator_animation === 'rain') { %>
+        <div class="rainwrapper">
+          <div class="rain front-row"></div>
+          <div class="rain back-row"></div>
         </div>
-        <!-- End of snow animation code-->
-        <img src="http://placeimg.com/640/480/arch">
-        <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
-      </div>
-      <div class="page" id="entry_2">
-        <!-- Example of how to add fog animation -->
+       <% } else if (entries[0].creator_animation === 'fog') { %>
         <div class="fogwrapper">
           <div id="foglayer_01" class="fog">
             <div class="fog_image01"></div>
@@ -45,48 +48,70 @@
             <div class="fog_image02"></div>
           </div>
         </div>
-        <!-- End of fog animation code -->
-        <img src="http://placeimg.com/640/480/nature">
-        <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
-      </div>
-      <div class="page" id="entry_3">
-        <!-- Example of how to add rain animation -->
-        <div class="rainwrapper">
-          <div class="rain front-row"></div>
-          <div class="rain back-row"></div>
+      <% } else if (entries[0].creator_animation === 'snow') { %>
+        <div class="snowwrapper">
+          <div class="snow"></div>
         </div>
-        <!-- End of rain animation code -->
-        <img src="http://placeimg.com/640/480/people">
-        <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
+      <% } %>
+        <img src="<%=entries[0].creator_photo%>">
+        <p><%=entries[0].first_entry%></p>
+        <data id="entry_1_sound" value="<%=entries[0].creator_sound%>"></data>
       </div>
-      <div class="page" id="entry_4">
-        <img src="http://placeimg.com/640/480/tech">
-        <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
-      </div>
+      <!-- CONTRIBUTOR ENTRIES -->
+      <% for (const entry of entries) { %>
+        <div class="page" id="entry_<%=entry.ord%>">
+          <% if (entry.contributor_anim === 'rain') { %>
+          <div class="rainwrapper">
+            <div class="rain front-row"></div>
+            <div class="rain back-row"></div>
+          </div>
+        <% } else if (entry.contributor_anim === 'fog') { %>
+          <div class="fogwrapper">
+            <div id="foglayer_01" class="fog">
+              <div class="fog_image01"></div>
+              <div class="fog_image02"></div>
+            </div>
+            <div id="foglayer_02" class="fog">
+              <div class="fog_image01"></div>
+              <div class="fog_image02"></div>
+            </div>
+            <div id="foglayer_03" class="fog">
+              <div class="fog_image01"></div>
+              <div class="fog_image02"></div>
+            </div>
+          </div>
+        <% } else if (entry.contributor_anim === 'snow') { %>
+          <div class="snowwrapper">
+            <div class="snow"></div>
+          </div>
+        <% } %>
+          <img src="<%=entry.contributor_photo%>">
+          <p><%=entry.contributor_entry%></p>
+          <data id="entry_<%=entry.ord%>_sound" value="<%=entry.contributor_sound%>"></data>
+          <data id="entry_<%=entry.ord%>_position" value="<%=entry.contributor_position%>"></data>
+        </div>
+      <% } %>
+      <!-- VOTE ON CONTRIBUTIONS -->
       <div class="page">
         <h2>The Story isn't over... Vote on what happens next!</h2>
         <section class="top_contributions">
-          <div>
-            <img src="http://placeimg.com/400/300/arch">
-            <button>Upvote</button>
-            <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
-          </div>
-          <div>
-            <img src="http://placeimg.com/400/300/nature">
-            <button>Upvote</button>
-            <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
-          </div>
-          <div>
-            <img src="http://placeimg.com/400/300/tech">
-            <button>Upvote</button>
-            <p>Sed in imperdiet felis. Nulla rhoncus mauris ligula, non bibendum ipsum rhoncus in. In in erat vehicula, aliquam magna quis, aliquam diam. Phasellus nec dolor ultricies, eleifend nisi ut, molestie metus. Pellentesque eget arcu dignissim, pretium sapien sit amet, venenatis enim. Donec ultricies mi sit amet augue porta, dignissim porttitor arcu tempor. Morbi posuere libero eu ante mollis sodales. In mauris turpis, laoreet tempus aliquet nec, varius quis purus. Sed vitae magna ut enim elementum rutrum. Nullam quis lorem sit amet tellus vehicula sollicitudin.</p>
-          </div>
+          <% for (const contribution of pendingContributions) { %>
+            <div>
+              <img src="<%=contribution.photo_url%>">
+              <button>Upvote</button>
+              <p><%=contribution.content%></p>
+            </div>
+          <% } %>
         </section>
-        <button id="all_contributions"> See All Contributions</button>
+        <form action="/stories/view_contributions/story_id/<%=storyID%>" method="GET">
+          <button id="all_contributions"> See All Contributions</button>
+        </form>
         <br>
         <section class="new_contribution">
           <h2>Want your say? Make a new contribution.</h2>
-          <button>Contribute to the story</button>
+          <form action="/stories/create_contribution/story_id/<%=storyID%>" method="GET">
+            <button>Contribute to the story</button>
+          </form>
           <br><br>
         </section>
       </div>
