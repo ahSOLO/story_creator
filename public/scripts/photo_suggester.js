@@ -14,13 +14,13 @@ $(document).ready(function() {
       $('#sentiment').append(sentiment);
 
       const photos = `
-      <input class="photo" type="radio" id="photo_1" name="photo" value="2">
+      <input class="photo" type="radio" id="photo_1" name="photo" value="${photoData.photoOneID}">
       <label class="photo" for="photo_1"><img src="${photoData.photoOne}"></label>
-      <input class="photo" type="radio" id="photo_2" name="photo" value="3">
+      <input class="photo" type="radio" id="photo_2" name="photo" value="${photoData.photoTwoID}">
       <label class="photo" for="photo_2"><img src="${photoData.photoTwo}"></label>
-      <input class="photo" type="radio" id="photo_3" name="photo" value="4">
+      <input class="photo" type="radio" id="photo_3" name="photo" value="${photoData.photoThreeID}">
       <label class="photo" for="photo_3"><img src="${photoData.photoThree}"></label>
-      <input class="photo" type="radio" id="photo_4" name="photo" value="5">
+      <input class="photo" type="radio" id="photo_4" name="photo" value="${photoData.photoFourID}">
       <label class="photo" for="photo_4"><img src="${photoData.photoFour}"></label>
       `;
       $('.suggested_photos').empty();
