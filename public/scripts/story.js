@@ -63,6 +63,46 @@ let pageNum = 0;
 $(() => {
   const pages = $("div.page");
 
+  // Create sideNav
+  const sideNav = $('div#navigation')
+
+  // Draw bullets and assign click handlers
+  pages.each( (ind, ele) => {
+    sideNav.append(`
+    <div class="nav-bullet" id="bullet_${ind}">
+      <p>•</p>
+    </div>
+    `);
+    $(`#bullet_${ind}`).on('click', function() {
+      console.log("gotopage");
+      goToPage(ind);
+    });
+  })
+
+  const bullets = sideNav.children();
+
+  // Update sideNav bullets and labels
+  const updateSideNav = function(pageNum) {
+    bullets.removeClass('selected').children().remove('span');
+        bullets.eq(pageNum).addClass('selected').append(`<span>${pageNum + 1} / ${pages.length}</span>`);
+  }
+
+  // Go to page function
+  const goToPage = function(ind) {
+    let current = pageNum
+    pageNum = ind;
+    if (current !== pageNum) {
+      return pages.eq(current).fadeOut(600, () => {
+        updateSideNav(pageNum);
+        pages.eq(pageNum).fadeIn(600, function() {
+          autoRain();
+          let soundType = $(this).find(`data#entry_${pageNum}_sound`).val();
+          refreshSound(soundType);
+        });
+      });
+    }
+  };
+
   // Start raining if a rainwrapper is included in the page
   let autoRain = function() {
     $('.rainwrapper').each( (index, ele) => {
@@ -77,6 +117,7 @@ $(() => {
     pageNum = Math.min(pageNum + 1, pages.length - 1);
     if (current !== pageNum) {
       return pages.eq(current).fadeOut(600, () => {
+        updateSideNav(pageNum);
         pages.eq(pageNum).fadeIn(600, function() {
           autoRain();
           detectScroll();
@@ -94,6 +135,7 @@ $(() => {
       pageNum = Math.max(pageNum - 1, 0);
       if (current !== pageNum) {
         return pages.eq(current).fadeOut(600, () => {
+          updateSideNav(pageNum);
           pages.eq(pageNum).fadeIn(600, function() {
             autoRain();
             detectScroll();
@@ -117,10 +159,6 @@ $(() => {
     });
   };
 
-  // Hide all pages but first
-  pages.slice(1).hide();
-  detectScroll();
-
   // Sound control
   const soundControl = function() {
     let sound = null;
@@ -138,4 +176,9 @@ $(() => {
   // Attach event handlers for sound control
   $('.fa-volume-up').on('click', soundControl).removeClass('hidden');
   $('.fa-volume-mute').on('click', soundControl);
+
+  //Initialization
+  pages.slice(1).hide();
+  detectScroll();
+  updateSideNav(pageNum);
 });

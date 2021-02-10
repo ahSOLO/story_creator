@@ -6,6 +6,39 @@ header {
   }
 }
 
+// Side-nav Bullets
+
+div#navigation {
+  position: fixed;
+  height: 100%;
+  right: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  padding-right: 25px;
+  z-index: 2;
+
+  p {
+    font-size: 1.6em;
+    margin: 0.20em 0em 0.20em 0.4em;
+  }
+
+  .nav-bullet {
+    cursor: pointer;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    opacity: 0.5;
+  }
+
+  .nav-bullet.selected {
+    opacity: 0.9;
+  }
+}
+
+// Story styles
+
 main p {
   padding: 1em;
 }
@@ -25,6 +58,31 @@ div.container {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  div#title {
+    h1 {
+      margin-bottom: 0px;
+    }
+
+    #scroll_text{
+      margin-bottom: 0px;
+      font-size: 0.9em;
+    }
+
+    @keyframes MoveUpDown {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(5px);
+      }
+    }
+
+    i {
+      font-size: 1.25em;
+      animation: MoveUpDown 1.0s linear infinite;
+    }
   }
 }
 
