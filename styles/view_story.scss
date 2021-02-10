@@ -16,10 +16,11 @@ img {
 }
 
 div.container {
-  max-width: 80%;
+  width: 80%;
 
   div.page {
     min-height: 90vh;
+    width:100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -28,6 +29,7 @@ div.container {
 }
 
 section.top_contributions {
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -38,8 +40,30 @@ section.top_contributions {
     display: flex;
     flex-direction: column;
 
+    p.upvotes {
+      margin: 0em;
+      padding-bottom: 0em;
+      text-align: center;
+    }
+
+    form {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+    }
+
     button {
-      margin-top: 2em;
+      margin-top: 1em;
+    }
+
+    button#voted {
+      background-color: #3D9140;
+      color: white;
+      cursor: default;
+    }
+
+    p {
+      margin-top: 0em;
     }
   }
   margin-bottom: 1em;

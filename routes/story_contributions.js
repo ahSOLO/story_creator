@@ -10,43 +10,35 @@ module.exports = (db) => {
 
     const userID = req.session["user_id"];
     let user;
-    let userVoted;
-
-    const queryStringOne = `
-    SELECT v.*, s.id as story_id
-    FROM upvotes v
-    JOIN contributions c
-    ON v.contribution_id = c.id and c.status = 'pending'
-    JOIN stories s
-    ON c.story_id = s.id
-    WHERE s.id = ${req.params.storyID}
-    AND user_id = ${userID}
-    `;
-
-    const queryStringTwo = `
-    SELECT c.*, p.photo_url
+    const queryString = `
+    SELECT c.*, MIN(p.photo_url) as photo_url, COUNT(v.id) as upvotes,
+    MAX(
+      CASE WHEN v.user_id = $2 THEN 1
+      WHEN v.user_id != $2 THEN 0
+      END) as user_voted
     FROM contributions c
     LEFT JOIN photos p
     ON c.photo_id = p.id
-    WHERE c.story_id = ${req.params.storyID}
-    AND c.status = 'pending';
+    LEFT JOIN upvotes v
+    ON v.contribution_id = c.id
+    WHERE c.story_id = $1
+    AND c.status = 'pending'
+    GROUP BY c.id
+    ORDER BY COUNT(v.id) DESC;
     `;
 
     helpers.getUserWithID(userID)
     .then((data) => {
+      console.log('user', data);
       user = data;
-      return db.query(queryStringOne);
+      return db.query(queryString, [req.params.storyID, userID]);
     })
     .then((data) => {
-      userVoted = data.rows;
-      return db.query(queryStringTwo);
-    })
-    .then((data) => {
+      console.log('contributions', data.rows);
       const contributions = data.rows;
       const templateVars = {
         contributions,
-        user,
-        userVoted
+        user
       };
       res.render("view_contributions", templateVars);
     })
@@ -59,7 +51,7 @@ module.exports = (db) => {
   });
 
   // Create an upvote for a contribution
-  router.post("/:storyID/contribution/:contributionID/upvote", (req, res) => {
+  router.post("/:storyID/contributions/:contributionID/upvote", (req, res) => {
 
     const userID = req.session["user_id"];
     const storyID = req.params.storyID;
@@ -107,10 +99,8 @@ module.exports = (db) => {
     })
   });
 
+  // Create a contribution
   router.post("/:storyID/create_contribution", (req, res) => {
-
-    console.log(req.body);
-
     const userID = req.session["user_id"];
     const storyID = req.params.storyID;
     const content = req.body.entry;
@@ -118,7 +108,6 @@ module.exports = (db) => {
     const sound = (req.body.sound || null);
     const photo = (req.body.photo || 1); // leaving 1 in as the default photo to be used for all photo-less entries, otherwise we would have to adjust EJS files to accommodate queries with no photos;
     const textPosition = 'bottom';
-    let order;
 
     // Do a query to determine what number to assign to order
     const queryString1 = `
@@ -134,6 +123,10 @@ module.exports = (db) => {
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;
     `;
 
+    const queryString3 = `
+    INSERT INTO upvotes (user_id, contribution_id) VALUES ($1, $2);
+    `;
+
     db.query(queryString1, queryParams1)
     .then((data) => {
       const order = 2 + Number(data.rows[0]["contributions_count"]);
@@ -141,8 +134,12 @@ module.exports = (db) => {
       return db.query(queryString2, queryParams2);
     })
     .then((data) => {
-      console.log("DATA 2", data);
-      const storyID = data.rows[0]["story_id"];
+      console.log(data.rows);
+      const contribution_id = data.rows[0].id;
+      const queryParams3 = [userID, contribution_id];
+      return db.query(queryString3, queryParams3);
+    })
+    .then(() => {
       res.redirect(`/stories/${storyID}/view`);
     })
     .catch(err => {
