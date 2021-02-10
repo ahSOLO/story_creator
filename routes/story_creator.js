@@ -99,7 +99,7 @@ module.exports = (db) => {
   });
 
   // Create a new story.
-  router.post("/create_story", (req, res) => {
+  router.post("/create", (req, res) => {
     const userID = req.session["user_id"];
     const title = req.body.title;
     const description = req.body.description;
