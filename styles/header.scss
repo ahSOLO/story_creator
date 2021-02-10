@@ -18,6 +18,10 @@ header {
     cursor: pointer;
   }
 
+  i.hidden {
+    display: none;
+  }
+
   span {
     font-size: 1.6em;
   }
