@@ -11,13 +11,23 @@ section.contributions {
     display: flex;
     flex-direction: column;
 
+    form {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: no-wrap;
+      align-items: center;
+      justify-content: center;
+    }
+
     button {
       margin-top: 2em;
     }
 
-    p#voted {
-      color: red;
+    button#voted {
+      background-color: green;
+      color: white;
     }
+
   }
 }
 

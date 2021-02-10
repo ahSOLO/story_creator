@@ -16,9 +16,10 @@
           <img src="<%= contributions[contribution]['photo_url'] %>">
           <form action="/stories/<%= contributions[contribution]['story_id'] %>/contribution/<%= contributions[contribution]['id'] %>/upvote" method="POST">
             <% if (userVoted.length > 0) { %>
-              <button disabled>Upvote</button>
               <% if (userVoted[0]['contribution_id'] === contributions[contribution]['id']) { %>
-                <p id="voted">You voted for this one already!</p>
+                <button disabled id="voted">Voted</button>
+              <% } else { %>
+                <button disabled>Upvote</button>
               <% } %>
             <% } else { %>
               <button>Upvote</button>
