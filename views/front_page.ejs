@@ -29,7 +29,7 @@
             <% if (stories[story]["featured"]) { %>
               <div>
                 <img src='<%= stories[story]["photo_url"] %>'>
-                <a href=""><h3><%= stories[story]["title"] %></h3></a>
+                <a href="/stories/<%= stories[story]['id'] %>/view"><h3><%= stories[story]["title"] %></h3></a>
                 <p><%= stories[story]["description"] %></p>
               </div>
             <% } %>
@@ -51,7 +51,7 @@
           <% for (let story in stories) { %>
             <tr>
               <td class="title">
-                <a href=""><%= stories[story]["title"] %></a>
+                <a href="/stories/<%= stories[story]['id'] %>/view"><%= stories[story]["title"] %></a>
               </td>
               <td><%= stories[story]["description"] %></td>
               <td><%= stories[story]["status"] %></td>

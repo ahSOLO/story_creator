@@ -76,6 +76,7 @@ app.get("/", (req, res) => {
   ON s.creator_id = u.id
   LEFT JOIN photos p
   ON s.photo_id = p.id
+  ORDER BY s.status asc, s.created_at desc
   `;
 
   helpers.getUserWithID(userID)
