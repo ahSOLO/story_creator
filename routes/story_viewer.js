@@ -26,27 +26,32 @@ module.exports = (db) => {
     LEFT JOIN ambient_sounds contributor_sounds ON contributor_sounds.id = contributions.ambient_sound_id
     WHERE stories.id = $1
     ORDER BY ord;`;
-    const queryParams = [req.params.storyID]
+    const queryParams1 = [req.params.storyID];
     const queryString2 =`
-    SELECT MIN(photos.photo_url) as photo_url, contributions.content as content
-    FROM stories
-    JOIN contributions ON (stories.id = story_id AND contributions.status = 'pending')
-    LEFT JOIN photos ON contributions.photo_id = photos.id
-    LEFT JOIN upvotes ON upvotes.contribution_id = contributions.id
-    WHERE stories.id = $1
-    GROUP BY contributions.id
-    ORDER BY COUNT(upvotes)
-    LIMIT 3;`;
+    SELECT MIN(photos.photo_url) as photo_url, contributions.id as id, contributions.content as content, COUNT(upvotes) as upvotes,
+    MAX(
+      CASE WHEN upvotes.user_id = $2 THEN 1
+      WHEN upvotes.user_id != $2 THEN 0
+      END) as user_voted
+      FROM stories
+      JOIN contributions ON (stories.id = story_id AND contributions.status = 'pending')
+      LEFT JOIN photos ON contributions.photo_id = photos.id
+      LEFT JOIN upvotes ON upvotes.contribution_id = contributions.id
+      WHERE stories.id = $1
+      GROUP BY contributions.id
+      ORDER BY COUNT(upvotes)
+      LIMIT 3;`;
+    const queryParams2 = [req.params.storyID, userID]
 
     helpers.getUserWithID(userID)
     .then((data) => {
       user = data;
-      return db.query(queryString1, queryParams);
+      return db.query(queryString1, queryParams1);
     })
     .then((data) => {
       entries = data.rows;
       console.log(entries);
-      return db.query(queryString2, queryParams);
+      return db.query(queryString2, queryParams2);
     })
     .then((data) => {
       pendingContributions = (data.rows)

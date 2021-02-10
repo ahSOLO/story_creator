@@ -14,13 +14,9 @@
       <% for (let contribution in contributions) { %>
         <div>
           <img src="<%= contributions[contribution]['photo_url'] %>">
-          <form action="/stories/<%= contributions[contribution]['story_id'] %>/contribution/<%= contributions[contribution]['id'] %>/upvote" method="POST">
-            <% if (userVoted.length > 0) { %>
-              <% if (userVoted[0]['contribution_id'] === contributions[contribution]['id']) { %>
-                <button disabled id="voted">Voted</button>
-              <% } else { %>
-                <button disabled>Upvote</button>
-              <% } %>
+          <form action="/stories/<%= contributions[contribution]['story_id'] %>/contributions/<%= contributions[contribution]['id'] %>/upvote" method="POST">
+            <% if (userVoted[contribution]['contribution_id'] === contributions[contribution]['id']) { %>
+              <button disabled id="voted">Voted</button>
             <% } else { %>
               <button>Upvote</button>
             <% } %>

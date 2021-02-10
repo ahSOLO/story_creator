@@ -12,6 +12,7 @@ module.exports = (db) => {
     let user;
     let userVoted;
 
+    // req.params.storyID can be edited in the URL so this might expose us to SQL injection: https://stackoverflow.com/questions/52945517/is-it-a-vulnerability-to-use-req-params-directly-in-an-express-js-route-without
     const queryStringOne = `
     SELECT v.*, s.id as story_id
     FROM upvotes v
@@ -34,14 +35,17 @@ module.exports = (db) => {
 
     helpers.getUserWithID(userID)
     .then((data) => {
+      console.log('user', data);
       user = data;
       return db.query(queryStringOne);
     })
     .then((data) => {
+      console.log('userVoted', data.rows);
       userVoted = data.rows;
       return db.query(queryStringTwo);
     })
     .then((data) => {
+      console.log('contributions', data.rows);
       const contributions = data.rows;
       const templateVars = {
         contributions,
@@ -59,7 +63,7 @@ module.exports = (db) => {
   });
 
   // Create an upvote for a contribution
-  router.post("/:storyID/contribution/:contributionID/upvote", (req, res) => {
+  router.post("/:storyID/contributions/:contributionID/upvote", (req, res) => {
 
     const userID = req.session["user_id"];
     const storyID = req.params.storyID;

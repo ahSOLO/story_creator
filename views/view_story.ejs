@@ -102,7 +102,14 @@
               <% for (const contribution of pendingContributions) { %>
                 <div>
                   <img src="<%=contribution.photo_url%>">
-                  <button>Upvote</button>
+                  <p class="upvotes">Total Upvotes: <%= contribution.upvotes %></p>
+                  <form action="/stories/<%= storyID %>/contributions/<%= contribution.id %>/upvote" method="POST">
+                    <% if (contribution.user_voted > 0) { %>
+                      <button disabled id="voted">Voted</button>
+                    <% } else { %>
+                      <button>Upvote</button>
+                    <% } %>
+                  </form>
                   <p><%=contribution.content%></p>
                 </div>
               <% } %>
