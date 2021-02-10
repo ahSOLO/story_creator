@@ -5,6 +5,7 @@
   <!-- Page-specific -->
   <title>Create a Story</title>
   <link rel="stylesheet" href="/styles/create.css" type="text/css" />
+  <script src="/scripts/photo_suggester.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <%- include('partials/_header')  %>
@@ -43,17 +44,13 @@
         <input type="radio" id="ocean_sound" name="sound" value="3">
         <label class="radio" for="ocean_sound">Ocean</label>
       </div>
-      <h3>Suggested Photos</h3>
+      <h3>Cover Photo</h3>
+      <button id="refresh_photos"><b>Refresh Photos</b></button>
+      <div id="sentiment">
+        <!-- sentiment -->
+      </div>
       <section class="suggested_photos">
-        <!-- replace values with suggested photo id from database -->
-        <input class="photo" type="radio" id="photo_1" name="photo" value="2">
-        <label class="photo" for="photo_1"><img src="http://placeimg.com/400/300/arch"></label>
-        <input class="photo" type="radio" id="photo_2" name="photo" value="3">
-        <label class="photo" for="photo_2"><img src="http://placeimg.com/400/300/nature"></label>
-        <input class="photo" type="radio" id="photo_3" name="photo" value="4">
-        <label class="photo" for="photo_3"><img src="http://placeimg.com/400/300/tech"></label>
-        <input class="photo" type="radio" id="photo_4" name="photo" value="5">
-        <label class="photo" for="photo_4"><img src="http://placeimg.com/400/300/any"></label>
+        <!-- photos inserted here -->
       </section>
       <br><br>
       <div class="button_spaced">

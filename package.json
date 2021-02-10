@@ -22,7 +22,8 @@
     "node-sass": "^4.12.0",
     "node-sass-middleware": "^0.11.0",
     "pg": "^8.5.1",
-    "pg-native": "^3.0.0"
+    "pg-native": "^3.0.0",
+    "sentiment": "^5.0.2"
   },
   "devDependencies": {
     "nodemon": "^1.19.1"

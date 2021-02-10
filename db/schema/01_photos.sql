@@ -3,5 +3,5 @@ DROP TABLE IF EXISTS photos CASCADE;
 CREATE TABLE photos (
   id SERIAL PRIMARY KEY NOT NULL,
   photo_url VARCHAR(255) NOT NULL,
-  category VARCHAR(255)
+  score INT
 );
