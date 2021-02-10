@@ -11,17 +11,17 @@
   <main>
     <h2>The Story isn't over... Vote on what happens next!</h2>
     <section class="contributions">
-      <% for (let contribution in contributions) { %>
+      <% for (const contribution of contributions) { %>
         <div>
-          <img src="<%= contributions[contribution]['photo_url'] %>">
-          <form action="/stories/<%= contributions[contribution]['story_id'] %>/contributions/<%= contributions[contribution]['id'] %>/upvote" method="POST">
-            <% if (userVoted[contribution]['contribution_id'] === contributions[contribution]['id']) { %>
+          <img src="<%= contribution['photo_url'] %>">
+          <form action="/stories/<%= contribution['story_id'] %>/contributions/<%= contribution['id'] %>/upvote" method="POST">
+            <% if (contribution.user_voted > 0) { %>
               <button disabled id="voted">Voted</button>
             <% } else { %>
               <button>Upvote</button>
             <% } %>
           </form>
-          <p><%= contributions[contribution]['content'] %></p>
+          <p><%= contribution['content'] %></p>
         </div>
       <% } %>
     </section>

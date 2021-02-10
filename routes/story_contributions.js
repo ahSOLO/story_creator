@@ -10,47 +10,35 @@ module.exports = (db) => {
 
     const userID = req.session["user_id"];
     let user;
-    let userVoted;
-
-    // req.params.storyID can be edited in the URL so this might expose us to SQL injection: https://stackoverflow.com/questions/52945517/is-it-a-vulnerability-to-use-req-params-directly-in-an-express-js-route-without
-    const queryStringOne = `
-    SELECT v.*, s.id as story_id
-    FROM upvotes v
-    JOIN contributions c
-    ON v.contribution_id = c.id and c.status = 'pending'
-    JOIN stories s
-    ON c.story_id = s.id
-    WHERE s.id = ${req.params.storyID}
-    AND user_id = ${userID}
-    `;
-
-    const queryStringTwo = `
-    SELECT c.*, p.photo_url
+    const queryString = `
+    SELECT c.*, MIN(p.photo_url) as photo_url, COUNT(v.id) as upvotes,
+    MAX(
+      CASE WHEN v.user_id = $2 THEN 1
+      WHEN v.user_id != $2 THEN 0
+      END) as user_voted
     FROM contributions c
     LEFT JOIN photos p
     ON c.photo_id = p.id
-    WHERE c.story_id = ${req.params.storyID}
-    AND c.status = 'pending';
+    LEFT JOIN upvotes v
+    ON v.contribution_id = c.id
+    WHERE c.story_id = $1
+    AND c.status = 'pending'
+    GROUP BY c.id
+    ORDER BY COUNT(v.id)
     `;
 
     helpers.getUserWithID(userID)
     .then((data) => {
       console.log('user', data);
       user = data;
-      return db.query(queryStringOne);
-    })
-    .then((data) => {
-      console.log('userVoted', data.rows);
-      userVoted = data.rows;
-      return db.query(queryStringTwo);
+      return db.query(queryString, [req.params.storyID, userID]);
     })
     .then((data) => {
       console.log('contributions', data.rows);
       const contributions = data.rows;
       const templateVars = {
         contributions,
-        user,
-        userVoted
+        user
       };
       res.render("view_contributions", templateVars);
     })
