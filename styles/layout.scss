@@ -72,6 +72,10 @@ nav {
   div.nav-bottom {
     padding: 1em;
     font-size: 0.9em;
+
+    p:hover {
+      color: #778DA9;
+    }
   }
 }
 
@@ -84,17 +88,23 @@ button {
   padding: 5px 1em 5px 1em;
   font-family: 'Roboto Mono', monospace;
   font-size: 0.9rem;
-  background-color: white;
+  background: white;
   cursor: pointer;
 }
 
 button:focus {
   background: #415A77;
+  outline: none;
   color: white;
 }
 
 button:hover {
-  background-color: #DDD;
+  background: #DDD;
+}
+
+button:hover:active, button:hover:focus {
+  background: #415A77;
+  box-shadow: 0px -1px 0px #0D1B2A;
 }
 
 label {
