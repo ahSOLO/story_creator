@@ -21,12 +21,6 @@ module.exports = (db) => {
     })
   });
 
-  // "Create Story" button on homepage
-  router.get("/create_story", (req, res) => {
-    res.redirect("/stories/create");
-  });
-
-
   // Suggest a new set of photos based on story sentiment
   router.post('/suggest_photos', function(req, res) {
 
@@ -45,13 +39,18 @@ module.exports = (db) => {
     const scores = [titleScore, descriptionScore, entryScore]
     let sumScore = 0;
     let countScore = 0;
+    let totalScore;
     for (score of scores) {
       if (score) {
         sumScore += score;
         countScore += 1;
       }
     }
-    const totalScore = sumScore / countScore;
+    if (countScore === 0) {
+      totalScore = 0;
+    } else {
+      totalScore = sumScore / countScore;
+    }
 
     let generalSentiment;
     if (totalScore <= -3) {
@@ -78,9 +77,13 @@ module.exports = (db) => {
     db.query(queryString)
     .then((data) => {
       const photoData = {
+        photoOneID: data.rows[0]["id"],
         photoOne: data.rows[0]["photo_url"],
+        photoTwoID: data.rows[1]["id"],
         photoTwo: data.rows[1]["photo_url"],
+        photoThreeID: data.rows[2]["id"],
         photoThree: data.rows[2]["photo_url"],
+        photoFourID: data.rows[3]["id"],
         photoFour: data.rows[3]["photo_url"],
         generalSentiment,
         totalScore
