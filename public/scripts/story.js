@@ -30,7 +30,8 @@ let rain = function() {
 const natureSound = new Audio('/sounds/nature.mp3');
 const stormSound = new Audio('/sounds/storm.mp3');
 const oceanSound = new Audio('/sounds/ocean.mp3');
-let mute = 0;
+let muted = 0;
+
 const stopSound = function (sound) {
   sound.pause();
   sound.currentTime = 0;
@@ -41,21 +42,22 @@ const refreshSound = function(sound) {
   stopSound(stormSound);
   stopSound(oceanSound);
 
-  switch (sound) {
-    case 'nature':
-      natureSound.play();
-      break;
-    case 'storm':
-      stormSound.play();
-      break;
-    case 'ocean':
-      oceanSound.play();
-      break;
+  if (muted === 0) {
+    switch (sound) {
+      case 'nature':
+        natureSound.play();
+        break;
+      case 'storm':
+        stormSound.play();
+        break;
+      case 'ocean':
+        oceanSound.play();
+        break;
+    }
   }
 }
 
 // Page turning
-
 let pageNum = 0;
 
 $(() => {
@@ -92,7 +94,7 @@ $(() => {
       pageNum = Math.max(pageNum - 1, 0);
       if (current !== pageNum) {
         return pages.eq(current).fadeOut(600, () => {
-          pages.eq(pageNum).fadeIn(600, () => {
+          pages.eq(pageNum).fadeIn(600, function() {
             autoRain();
             detectScroll();
             let soundType = $(this).find(`data#entry_${pageNum}_sound`).val();
@@ -123,7 +125,10 @@ $(() => {
   const soundControl = function() {
     let sound = null;
     if ($(this).attr('class') === 'fas fa-volume-mute') {
+      muted = 0;
       sound = pages.eq(pageNum).find(`data#entry_${pageNum}_sound`).val()
+    } else {
+      muted = 1;
     }
     refreshSound(sound);
     $("div.volume_control i").removeClass('hidden');
