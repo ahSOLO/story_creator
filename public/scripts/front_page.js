@@ -2,7 +2,6 @@ $(() => {
   $('header').hide()
   let scrolltotop = document.scrollingElement.scrollTop;
   const intro = $("div.intro_scroll");
-  console.log(scrolltotop);
   if (scrolltotop >= 800) {
     intro.hide();
     $('header').slideDown();
@@ -19,5 +18,10 @@ $(() => {
       intro.slideDown();
       $('header').slideUp();
     }
-  })
+  });
+  $('i.fa-angle-double-down').on('click', () => {
+    $("body, html").animate(
+      { scrollTop: $('#featured_stories_section').offset().top }
+    );
+  });
 });
