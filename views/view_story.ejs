@@ -95,24 +95,26 @@
       <% } %>
       <!-- VOTE ON CONTRIBUTIONS -->
       <div class="page">
-        <h2>The Story isn't over... Vote on what happens next!</h2>
-        <section class="top_contributions">
-          <% for (const contribution of pendingContributions) { %>
-            <div>
-              <img src="<%=contribution.photo_url%>">
-              <button>Upvote</button>
-              <p><%=contribution.content%></p>
-            </div>
-          <% } %>
-        </section>
-        <form action="/stories/<%=storyID%>/view_contributions" method="GET">
-          <button id="all_contributions"> See All Contributions</button>
-        </form>
-        <br>
+        <% if (pendingContributions[0]) { %>
+          <h2>The Story isn't over... Vote on what happens next!</h2>
+          <section class="top_contributions">
+            <% for (const contribution of pendingContributions) { %>
+              <div>
+                <img src="<%=contribution.photo_url%>">
+                <button>Upvote</button>
+                <p><%=contribution.content%></p>
+              </div>
+            <% } %>
+          </section>
+          <form action="/stories/<%=storyID%>/view_contributions" method="GET">
+            <button id="all_contributions"> See All Contributions</button>
+          </form>
+          <br>
+        <% } %>
         <section class="new_contribution">
           <h2>Want your say? Make a new contribution.</h2>
           <form action="/stories/<%=storyID%>/create_contribution" method="GET">
-            <button>Contribute to the story</button>
+            <button>Contribute to this story</button>
           </form>
           <br><br>
         </section>
