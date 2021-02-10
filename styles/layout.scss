@@ -84,12 +84,17 @@ button {
   padding: 5px 1em 5px 1em;
   font-family: 'Roboto Mono', monospace;
   font-size: 0.9rem;
+  background-color: white;
   cursor: pointer;
 }
 
 button:focus {
   background: #415A77;
   color: white;
+}
+
+button:hover {
+  background-color: #DDD;
 }
 
 label {
