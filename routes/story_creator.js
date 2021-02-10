@@ -21,12 +21,6 @@ module.exports = (db) => {
     })
   });
 
-  // "Create Story" button on homepage
-  router.get("/create_story", (req, res) => {
-    res.redirect("/stories/create");
-  });
-
-
   // Suggest a new set of photos based on story sentiment
   router.post('/suggest_photos', function(req, res) {
 
