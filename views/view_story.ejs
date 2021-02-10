@@ -12,6 +12,23 @@
 </head>
 <body>
   <%- include('partials/_header')  %>
+  <div id="navigation">
+    <!-- <div class="nav-bullet selected">
+      <p>•</p><span>1 / 5</span>
+    </div>
+    <div class="nav-bullet">
+      <p>•</p>
+    </div>
+    <div class="nav-bullet">
+      <p>•</p>
+    </div>
+    <div class="nav-bullet">
+      <p>•</p>
+    </div>
+    <div class="nav-bullet">
+      <p>•</p>
+    </div> -->
+  </div>
   <main>
     <div class="container">
       <!-- TITLE -->
@@ -24,7 +41,9 @@
           <% } else if (entry.contributor) { %>
           <%=", " + entry.contributor%>
           <% }} %></p>
-        <br>
+        <br><br><br>
+        <p id="scroll_text">SCROLL TO BEGIN THE STORY...</p>
+        <i class="fas fa-chevron-down"></i>
       </div>
       <!-- FIRST ENTRY -->
       <div class="page" id="entry_1">
