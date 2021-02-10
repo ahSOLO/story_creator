@@ -12,7 +12,7 @@
     <h2><%= contributions[0]["title"] %></h2>
     <p class="description"><%= contributions[0]["description"] %></p>
     <form class="update_description" action="/stories/<%= contributions[0]['id'] %>/update_description" method="POST">
-      <textarea name="description" id="description" rows="2" cols="100"></textarea>
+      <textarea name="description" id="description" rows="2" cols="100" required></textarea>
       <button type="submit">Update Description</button>
     </form>
     <% if (contributions[0]["status"] === 'complete') { %>
