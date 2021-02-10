@@ -55,6 +55,12 @@ section.new_contribution {
   align-items: center;
 }
 
+section.story_end {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 // Example of how we can customize the layout for each entry
 
 #entry_2 {
@@ -73,6 +79,16 @@ section.new_contribution {
 }
 
 #entry_6 {
+  display: flex;
+  flex-direction: row;
+}
+
+#entry_8 {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+#entry_9 {
   display: flex;
   flex-direction: row;
 }
