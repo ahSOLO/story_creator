@@ -24,7 +24,7 @@ module.exports = (db) => {
     WHERE c.story_id = $1
     AND c.status = 'pending'
     GROUP BY c.id
-    ORDER BY COUNT(v.id)
+    ORDER BY COUNT(v.id) DESC;
     `;
 
     helpers.getUserWithID(userID)
@@ -99,10 +99,8 @@ module.exports = (db) => {
     })
   });
 
+  // Create a contribution
   router.post("/:storyID/create_contribution", (req, res) => {
-
-    console.log(req.body);
-
     const userID = req.session["user_id"];
     const storyID = req.params.storyID;
     const content = req.body.entry;
@@ -110,7 +108,6 @@ module.exports = (db) => {
     const sound = (req.body.sound || null);
     const photo = (req.body.photo || 1); // leaving 1 in as the default photo to be used for all photo-less entries, otherwise we would have to adjust EJS files to accommodate queries with no photos;
     const textPosition = 'bottom';
-    let order;
 
     // Do a query to determine what number to assign to order
     const queryString1 = `
@@ -126,6 +123,10 @@ module.exports = (db) => {
     VALUES ($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *;
     `;
 
+    const queryString3 = `
+    INSERT INTO upvotes (user_id, contribution_id) VALUES ($1, $2);
+    `;
+
     db.query(queryString1, queryParams1)
     .then((data) => {
       const order = 2 + Number(data.rows[0]["contributions_count"]);
@@ -133,8 +134,12 @@ module.exports = (db) => {
       return db.query(queryString2, queryParams2);
     })
     .then((data) => {
-      console.log("DATA 2", data);
-      const storyID = data.rows[0]["story_id"];
+      console.log(data.rows);
+      const contribution_id = data.rows[0].id;
+      const queryParams3 = [userID, contribution_id];
+      return db.query(queryString3, queryParams3);
+    })
+    .then(() => {
       res.redirect(`/stories/${storyID}/view`);
     })
     .catch(err => {

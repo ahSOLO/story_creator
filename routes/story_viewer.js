@@ -39,7 +39,7 @@ module.exports = (db) => {
       LEFT JOIN upvotes ON upvotes.contribution_id = contributions.id
       WHERE stories.id = $1
       GROUP BY contributions.id
-      ORDER BY COUNT(upvotes)
+      ORDER BY COUNT(upvotes) DESC
       LIMIT 3;`;
     const queryParams2 = [req.params.storyID, userID]
 
