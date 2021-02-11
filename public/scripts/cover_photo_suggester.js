@@ -1,5 +1,17 @@
 $(document).ready(function() {
 
+  // Load initial set of photos
+  $.ajax({
+    type: 'POST',
+    url: '/stories/cover_photo/initial',
+    success: function(data) {
+      loadPhotos(data);
+    },
+    error: function() {
+      console.log('Error');
+    }
+  })
+
   // Function for generating photos
   const loadPhotos = function(photoData) {
     $.ajax({
@@ -27,17 +39,6 @@ $(document).ready(function() {
       $('.suggested_photos').append(photos);
     });
   };
-
-  // Load initial photos
-  const initialPhotos = {
-    photoOne: "https://picsum.photos/id/0/400/300",
-    photoTwo: "https://picsum.photos/id/100/400/300",
-    photoThree: "https://picsum.photos/id/200/400/300",
-    photoFour: "https://picsum.photos/id/300/400/300",
-    generalSentiment: "Fill out the form and click refresh to see suggested photos based on tone of your story!",
-    totalScore: undefined
-  }
-  loadPhotos(initialPhotos);
 
   // When the Refresh Photos button is clicked, grab the inputs to run sentiment analysis
   $("#refresh_photos").on("click", function(event) {

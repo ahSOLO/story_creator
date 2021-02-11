@@ -105,6 +105,38 @@ module.exports = (db) => {
     })
   });
 
+  // Send back initial set of photos on page load
+  router.post("/contribution/initial", (req, res) => {
+    const queryString = `
+    SELECT *
+    FROM photos
+    ORDER BY random()
+    LIMIT 4
+    `
+
+    db.query(queryString)
+    .then((data) => {
+      const photoData = {
+        photoOneID: data.rows[0]["id"],
+        photoOne: data.rows[0]["photo_url"],
+        photoTwoID: data.rows[1]["id"],
+        photoTwo: data.rows[1]["photo_url"],
+        photoThreeID: data.rows[2]["id"],
+        photoThree: data.rows[2]["photo_url"],
+        photoFourID: data.rows[3]["id"],
+        photoFour: data.rows[3]["photo_url"],
+        generalSentiment: "Fill out the form and click refresh to see suggested photos based on tone of your story!",
+        totalScore: undefined
+      };
+      res.json(photoData);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+  });
+
   // Suggest a new set of photos based on contribution sentiment
   router.post('/contribution/suggest_photos', function(req, res) {
 

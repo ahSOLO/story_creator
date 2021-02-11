@@ -20,7 +20,7 @@
       <p>This story is finished! Click <a href="/stories/<%= contributions[0]['id'] %>/view" style="font-weight:bold">here</a> to view.</p>
     <% } else { %>
       <h2>Latest Contributions</h2>
-      <% if (contributions.length > 1) { %>
+      <% if (contributions[0]["content"]) { %>
         <table class="contributions">
           <tr>
             <th>Text</th>
@@ -37,6 +37,9 @@
                 <button class="preview">Preview</button>
                 <form action="/stories/<%= contributions[0]['id'] %>/contributions/<%= contributions[contribution]['contribution_id'] %>/accept" method="POST">
                   <button class="accept">Accept</button>
+                </form>
+                <form action="/stories/<%= contributions[0]['id'] %>/contributions/<%= contributions[contribution]['contribution_id'] %>/delete" method="POST">
+                  <button class="accept">Delete</button>
                 </form>
               </td>
             </tr>
