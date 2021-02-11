@@ -102,9 +102,13 @@ button:hover {
   background: #DDD;
 }
 
-button:hover:active, button:hover:focus {
+button:hover:active {
   background: #415A77;
   box-shadow: 0px -1px 0px #0D1B2A;
+}
+
+button:hover:focus {
+  background: #415A77;
 }
 
 label {
