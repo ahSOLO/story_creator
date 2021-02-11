@@ -2,8 +2,9 @@ $(document).ready(function() {
 
   // Function for generating photos
   const loadPhotos = function(photoData) {
+    const storyID = $('#story_id').text();
     $.ajax({
-      url: `/stories/create`,
+      url: `/stories/${storyID}/create_contribution`,
       method: "GET"
     })
     .then(function() {
@@ -45,7 +46,7 @@ $(document).ready(function() {
     $(this).blur();
     $.ajax({
       type: 'POST',
-      url: '/stories/suggest_photos',
+      url: '/stories/contribution/suggest_photos',
       data: {
         title: $('#title').val(),
         description: $('#description').val(),
