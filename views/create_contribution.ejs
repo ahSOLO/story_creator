@@ -6,6 +6,7 @@
   <title>Contribute</title>
   <link rel="stylesheet" href="/styles/create.css" type="text/css" />
   <script src="/scripts/contribution_photo_suggester.js" crossorigin="anonymous"></script>
+  <script src="/scripts/preview.js" crossorigin="anonymous"></script>
 </head>
 <body>
   <%- include('partials/_header')  %>
@@ -20,7 +21,7 @@
       </div>
       <h3>Animation Effects</h3>
       <!-- Animation IDs: 1 - rain, 2 - snow, 3 - fog -->
-      <div class="button_row">
+      <div class="anim_buttons">
         <input type="radio" id="no_anim" name="animation" checked="checked" value="">
         <label class="radio" for="no_anim">None</label>
         <input type="radio" id="rain_anim" name="animation" value="1">
@@ -32,7 +33,7 @@
       </div>
       <h3>Sound Effects</h3>
       <!-- Sound IDs: 1 - nature, 2 - storm, 3 - ocean -->
-      <div class="button_row">
+      <div class="sound_buttons">
         <input type="radio" id="no_sound" name="sound" checked="checked" value="">
         <label class="radio" for="no_sound">None</label>
         <input type="radio" id="nature_sound" name="sound" value="1">
@@ -52,11 +53,18 @@
       </section>
       <br><br>
       <div class="button_spaced">
-        <button id="preview">Preview</button>
+        <button type="button" id="preview">Preview</button>
         <button type="submit" id="save"><b>Save your Contribution</b></button>
       </div>
     </form>
     <br><br>
+    <form id="preview_form" method="POST" action="/stories/preview" target="preview">
+      <input type="hidden" name="title" value="" />
+      <input type="hidden" name="animation" value="" />
+      <input type="hidden" name="photo" value="" />
+      <input type="hidden" name="sound" value="" />
+      <input type="hidden" name="content" value="" />
+    </form>
   </main>
 </body>
 </html>
