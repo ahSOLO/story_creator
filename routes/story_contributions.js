@@ -54,11 +54,11 @@ module.exports = (db) => {
   });
 
   // Create an upvote for a contribution
-  router.post("/:storyID/contributions/:contributionID/upvote", (req, res) => {
+  router.post("/contributions/upvote", (req, res) => {
 
-    const userID = req.session["user_id"];
-    const storyID = req.params.storyID;
-    const contributionID = req.params.contributionID;
+    // const storyID = req.body.story_id;
+    const contributionID = req.body.contributionID;
+    const userID = req.body.userID;
 
     const queryString = `
     INSERT INTO upvotes (user_id, contribution_id)
@@ -68,7 +68,7 @@ module.exports = (db) => {
     if (userID) {
       db.query(queryString, [userID, contributionID])
       .then(() => {
-        res.redirect(`/stories/${storyID}/view_contributions`);
+        res.json("Success");
       })
       .catch(err => {
         res
