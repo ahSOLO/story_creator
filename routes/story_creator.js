@@ -117,7 +117,7 @@ module.exports = (db) => {
     db.query(queryString, queryParams)
     .then((data) => {
       const storyID = data.rows[0]["id"];
-      res.redirect(`/stories/${storyID}/edit`);
+      res.redirect(`/stories/${storyID}/view`);
     })
     .catch(err => {
       res
