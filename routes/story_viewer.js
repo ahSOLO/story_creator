@@ -15,7 +15,7 @@ module.exports = (db) => {
     let authorString = '';
 
     const queryString1 = `
-    SELECT stories.title as title, creators.name as creator, contributors.name as contributor, creator_animations.type as creator_animation, creator_photos.photo_url as creator_photo, stories.first_entry as first_entry, creator_sounds.type as creator_sound, contributions.order_rank as ord, contributor_animations.type as contributor_anim, contributor_photos.photo_url as contributor_photo, contributions.content as contributor_entry, contributor_sounds.type as contributor_sound, contributions.text_position as contributor_position, stories.status as story_status
+    SELECT stories.id as story_id, stories.title as title, creators.name as creator, contributors.name as contributor, creator_animations.type as creator_animation, creator_photos.photo_url as creator_photo, stories.first_entry as first_entry, creator_sounds.type as creator_sound, contributions.order_rank as ord, contributor_animations.type as contributor_anim, contributor_photos.photo_url as contributor_photo, contributions.content as contributor_entry, contributor_sounds.type as contributor_sound, contributions.text_position as contributor_position, stories.status as story_status
     FROM stories
     LEFT JOIN contributions ON (story_id = stories.id AND contributions.status = 'accepted')
     LEFT JOIN users creators ON creator_id = creators.id

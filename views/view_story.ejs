@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="/styles/fog.css" type="text/css" />
   <link rel="stylesheet" href="/styles/rain.css" type="text/css" />
   <script type="text/javascript" src="/scripts/story.js"></script>
+  <script type="text/javascript" src="/scripts/upvoter.js"></script>
 </head>
 <body>
   <%- include('partials/_header')  %>
@@ -101,14 +102,12 @@
               <% for (const contribution of pendingContributions) { %>
                 <div>
                   <img src="<%=contribution.photo_url%>">
-                  <p class="upvotes">Total Upvotes: <%= contribution.upvotes %></p>
-                  <form action="/stories/<%= storyID %>/contributions/<%= contribution.id %>/upvote" method="POST">
-                    <% if (contribution.user_voted > 0) { %>
-                      <button disabled id="voted">Voted</button>
-                    <% } else { %>
-                      <button>Upvote</button>
-                    <% } %>
-                  </form>
+                  <p class="upvotes">Total Upvotes: <span class="upvote_count" data-contribution="<%= contribution.id %>"><%= contribution.upvotes %></span></p>
+                  <% if (contribution.user_voted > 0) { %>
+                    <button disabled id="voted">Voted</button>
+                  <% } else { %>
+                    <button class="upvote" data-contribution="<%= contribution.id %>" data-user="<%= user.user_id %>">Upvote</button>
+                  <% } %>
                   <p><%=contribution.content%></p>
                 </div>
               <% } %>
