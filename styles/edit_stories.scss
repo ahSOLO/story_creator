@@ -53,3 +53,13 @@ div.complete_story {
     margin-left: 2em;
   }
 }
+
+div.bottom {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+    button {
+    margin-right: 2em;
+  }
+}
