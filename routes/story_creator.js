@@ -22,7 +22,7 @@ module.exports = (db) => {
   });
 
   // Suggest a new set of photos based on story sentiment
-  router.post('/suggest_photos', function(req, res) {
+  router.post('/cover_photo/suggest_photos', function(req, res) {
 
     const title = req.body.title;
     const titleSentiment = sentiment.analyze(title);

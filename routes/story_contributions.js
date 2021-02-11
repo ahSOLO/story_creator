@@ -1,6 +1,9 @@
-const { query } = require('express');
 const express = require('express');
 const router  = express.Router();
+
+const Sentiment = require('sentiment');
+const sentiment = new Sentiment();
+
 const helpers = require('../helpers');
 
 module.exports = (db) => {
@@ -81,7 +84,7 @@ module.exports = (db) => {
 
     let storyTitle;
     const queryString = `
-    SELECT title
+    SELECT id, title
     FROM stories
     WHERE stories.id = $1;
     `;
@@ -89,14 +92,70 @@ module.exports = (db) => {
 
     db.query(queryString, queryParams)
     .then((data) => {
-      storyTitle = data.rows[0].title;
+      story = data.rows[0];
       helpers.getUserWithID(userID);
     })
     .then((data) => {
       user = data;
-      const templateVars = { user, storyTitle };
+      const templateVars = {
+        user,
+        story
+      };
       res.render("create_contribution", templateVars);
     })
+  });
+
+  // Suggest a new set of photos based on contribution sentiment
+  router.post('/contribution/suggest_photos', function(req, res) {
+
+    const entry = req.body.entry;
+    const entrySentiment = sentiment.analyze(entry);
+    const entryScore = entrySentiment["score"] / entrySentiment["words"].length || 0;
+
+    let generalSentiment;
+    if (entryScore <= -3) {
+      generalSentiment = 'Sounds like your story might be on the darker side!';
+    } else if (entryScore < -1) {
+      generalSentiment = 'Sounds like your story might be a little bit dark!';
+    } else if (entryScore <= 1) {
+      generalSentiment = 'The tone of your story sounds fairly neutral.';
+    } else if (entryScore > 1) {
+      generalSentiment = 'Sounds like you want to write a positive story!';
+    } else {
+      generalSentiment = 'Your story sounds really happy!';
+    };
+    generalSentiment += ' How about one of these to be the cover photo?'
+
+    const queryString = `
+    SELECT *
+    FROM photos
+    WHERE abs(score - ${entryScore}) <= 1
+    ORDER BY random()
+    LIMIT 4
+    `
+
+    db.query(queryString)
+    .then((data) => {
+      const photoData = {
+        photoOneID: data.rows[0]["id"],
+        photoOne: data.rows[0]["photo_url"],
+        photoTwoID: data.rows[1]["id"],
+        photoTwo: data.rows[1]["photo_url"],
+        photoThreeID: data.rows[2]["id"],
+        photoThree: data.rows[2]["photo_url"],
+        photoFourID: data.rows[3]["id"],
+        photoFour: data.rows[3]["photo_url"],
+        generalSentiment,
+        entryScore
+      };
+      res.json(photoData);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+
   });
 
   // Create a contribution
