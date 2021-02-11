@@ -27,7 +27,7 @@ module.exports = (db) => {
     WHERE c.story_id = $1
     AND c.status = 'pending'
     GROUP BY c.id
-    ORDER BY COUNT(v.id) DESC;
+    ORDER BY COUNT(v.id) DESC, c.created_at DESC;
     `;
 
     helpers.getUserWithID(userID)

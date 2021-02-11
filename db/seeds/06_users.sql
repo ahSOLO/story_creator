@@ -8,4 +8,5 @@ VALUES ('Daenerys Targaryen', TRUE),
 ('Jorah Mormont', FALSE),
 ('Theon Greyjoy', FALSE),
 ('Tyrion Lannister', FALSE),
-('Davos Seaworth', FALSE);
+('Davos Seaworth', FALSE),
+('Marjorie Wilson', TRUE);

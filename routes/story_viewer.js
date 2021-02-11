@@ -41,7 +41,7 @@ module.exports = (db) => {
       LEFT JOIN upvotes ON upvotes.contribution_id = contributions.id
       WHERE stories.id = $1
       GROUP BY contributions.id
-      ORDER BY COUNT(upvotes) DESC
+      ORDER BY COUNT(upvotes) DESC, contributions.created_at DESC
       LIMIT 3;`;
     const queryParams2 = [req.params.storyID, userID]
 
@@ -61,7 +61,7 @@ module.exports = (db) => {
       };
       for (const [index, author] of authors.entries()) {
         if (author) {
-          if (index === authors.length - 1) {
+          if (authors.length > 1 && index === authors.length - 1) {
             authorString += ` and ${author}`;
           } else if (index === 0) {
             authorString += author;
