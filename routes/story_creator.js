@@ -8,7 +8,7 @@ const helpers = require('../helpers');
 
 module.exports = (db) => {
 
-  // render the "Create Story" page for user_id
+  // Render the "Create Story" page for user_id
   router.get("/create", (req, res) => {
     const userID = req.session["user_id"];
     let user;
@@ -19,6 +19,38 @@ module.exports = (db) => {
       const templateVars = { user };
       res.render("create_story", templateVars);
     })
+  });
+
+  // Send back initial set of photos on page load
+  router.post("/cover_photo/initial", (req, res) => {
+    const queryString = `
+    SELECT *
+    FROM photos
+    ORDER BY random()
+    LIMIT 4
+    `
+
+    db.query(queryString)
+    .then((data) => {
+      const photoData = {
+        photoOneID: data.rows[0]["id"],
+        photoOne: data.rows[0]["photo_url"],
+        photoTwoID: data.rows[1]["id"],
+        photoTwo: data.rows[1]["photo_url"],
+        photoThreeID: data.rows[2]["id"],
+        photoThree: data.rows[2]["photo_url"],
+        photoFourID: data.rows[3]["id"],
+        photoFour: data.rows[3]["photo_url"],
+        generalSentiment: "Fill out the form and click refresh to see suggested photos based on tone of your story!",
+        totalScore: undefined
+      };
+      res.json(photoData);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
   });
 
   // Suggest a new set of photos based on story sentiment
