@@ -103,6 +103,30 @@ module.exports = (db) => {
 
   });
 
+  // Delete a contribution from the "Edit Story" page
+  router.post("/:storyID/contributions/:contributionID/delete", (req, res) => {
+
+    const storyID = req.params.storyID;
+    const contributionID = req.params.contributionID;
+
+    const queryString = `
+    UPDATE contributions
+    SET status = 'deleted'
+    WHERE id = $1;
+    `;
+
+    db.query(queryString, [contributionID])
+    .then(() => {
+      res.redirect(`/stories/${storyID}/edit`);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+
+  });
+
   // Complete story from the "Edit Story" page
   router.post("/:storyID/complete", (req, res) => {
 
