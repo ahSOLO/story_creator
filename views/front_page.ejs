@@ -28,7 +28,7 @@
           <% for (let story in stories) { %>
             <% if (stories[story]["featured"]) { %>
               <div>
-                <img src='<%= stories[story]["photo_url"] %>'>
+                <a href="/stories/<%= stories[story]['id'] %>/view"><img src='<%= stories[story]["photo_url"] %>'></a>
                 <a href="/stories/<%= stories[story]['id'] %>/view"><h3><%= stories[story]["title"] %></h3></a>
                 <p><%= stories[story]["description"] %></p>
               </div>

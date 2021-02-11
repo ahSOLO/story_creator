@@ -33,7 +33,8 @@ module.exports = (db) => {
       const contributions = data.rows;
       const templateVars = {
         contributions,
-        user
+        user,
+        storyID
       };
       res.render("edit_stories", templateVars);
     })
