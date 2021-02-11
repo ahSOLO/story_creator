@@ -120,9 +120,9 @@ $(() => {
         updateSideNav(pageNum);
         pages.eq(pageNum).fadeIn(600, function() {
           autoRain();
-          detectScroll();
           let soundType = $(this).find(`data#entry_${pageNum}_sound`).val();
           refreshSound(soundType);
+          detectScroll();
         });
       });
     }
@@ -138,9 +138,9 @@ $(() => {
           updateSideNav(pageNum);
           pages.eq(pageNum).fadeIn(600, function() {
             autoRain();
-            detectScroll();
             let soundType = $(this).find(`data#entry_${pageNum}_sound`).val();
             refreshSound(soundType);
+            detectScroll();
           });
         });
       }
