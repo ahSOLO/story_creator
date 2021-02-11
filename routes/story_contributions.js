@@ -65,15 +65,20 @@ module.exports = (db) => {
     VALUES ($1, $2) RETURNING *;
     `;
 
-    db.query(queryString, [userID, contributionID])
-    .then(() => {
-      res.redirect(`/stories/${storyID}/view_contributions`);
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
+    if (userID) {
+      db.query(queryString, [userID, contributionID])
+      .then(() => {
+        res.redirect(`/stories/${storyID}/view_contributions`);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+    } else {
+      const templateVars = { user: undefined };
+      res.render("access_denied", templateVars);
+    }
 
   });
 
@@ -101,7 +106,11 @@ module.exports = (db) => {
         user,
         story
       };
-      res.render("create_contribution", templateVars);
+      if (userID) {
+        res.render("create_contribution", templateVars);
+      } else {
+        res.render("access_denied", templateVars);
+      }
     })
   });
 

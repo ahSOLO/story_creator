@@ -17,8 +17,17 @@ module.exports = (db) => {
     .then((data) => {
       user = data;
       const templateVars = { user };
-      res.render("create_story", templateVars);
+      if (userID) {
+        res.render("create_story", templateVars);
+      } else {
+        res.render("access_denied", templateVars);
+      }
     })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
   });
 
   // Send back initial set of photos on page load
