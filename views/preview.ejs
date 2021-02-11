@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <%- include('partials/_head')  %>
+  <!-- Page-specific (remove '/public' when using as template)-->
+  <title>View Stories</title>
+  <link rel="stylesheet" href="/styles/view_story.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/snow.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/fog.css" type="text/css" />
+  <link rel="stylesheet" href="/styles/rain.css" type="text/css" />
+  <script type="text/javascript" src="/scripts/story.js"></script>
+</head>
+<body>
+  <%- include('partials/_header')  %>
+  <div id="navigation">
+  </div>
+  <main>
+    <div class="container">
+      <!-- TITLE -->
+      <% if (title) { %>
+        <div class="page" id="title">
+          <img src="<%= photo %>">
+          <h1><%= title %></h1>
+          <p><b>By:</b> <%= user %></p>
+          <br><br><br>
+          <p id="scroll_text">SCROLL TO BEGIN THE STORY...</p>
+          <i class="fas fa-chevron-down"></i>
+        </div>
+      <% } %>
+      <div class="page" id="entry_1">
+        <% if (animation === 'rain') { %>
+        <div class="rainwrapper">
+          <div class="rain front-row"></div>
+          <div class="rain back-row"></div>
+        </div>
+      <% } else if (animation === 'fog') { %>
+        <div class="fogwrapper">
+          <div id="foglayer_01" class="fog">
+            <div class="fog_image01"></div>
+            <div class="fog_image02"></div>
+          </div>
+          <div id="foglayer_02" class="fog">
+            <div class="fog_image01"></div>
+            <div class="fog_image02"></div>
+          </div>
+          <div id="foglayer_03" class="fog">
+            <div class="fog_image01"></div>
+            <div class="fog_image02"></div>
+          </div>
+        </div>
+      <% } else if (animation === 'snow') { %>
+        <div class="snowwrapper">
+          <div class="snow"></div>
+        </div>
+      <% } %>
+        <img src="<%=photo%>">
+        <p><%=content%></p>
+        <data id="entry_1_sound" value="<%=sound%>"></data>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

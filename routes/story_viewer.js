@@ -91,6 +91,85 @@ module.exports = (db) => {
     });
   });
 
+  // render the "Preview" page for a pending contribution
+
+  router.get("/preview/:contributionID", (req, res) => {
+
+    db.query(`
+    SELECT animations.type as animation, photos.photo_url as photo, ambient_sounds.type as sound, contributions.content as content
+    FROM contributions
+    LEFT JOIN animations on animations.id = animation_id
+    LEFT JOIN photos on photos.id = photo_id
+    LEFT JOIN ambient_sounds on ambient_sounds.id = ambient_sound_id
+    WHERE contributions.id = $1;
+    `, [req.params.contributionID])
+    .then( (data) => {
+      const templateVars = data.rows[0];
+      templateVars.title = null;
+      templateVars.user = null;
+      res.render('preview', templateVars);
+    });
+
+  });
+
+  // render the "Preview" page for a create story or create contribution form
+
+  router.post("/preview", (req, res) => {
+
+    let title = req.body.title;
+    let animation = null;
+    let photo;
+    let sound = null;
+    let content = req.body.content;
+    let user;
+
+    // Get user name
+    db.query(`
+    SELECT name
+    FROM users
+    WHERE users.id = $1
+    `, [req.session.user_id])
+    .then((data) => {
+      user = data.rows[0].name;
+      // Get animation type
+      if (req.body.animation) {
+        return db.query(`
+        SELECT type
+        FROM animations
+        WHERE animations.id = $1
+        `, [req.body.animation]);
+      } else {
+        return null;
+      }
+    })
+    .then((data) => {
+      if (data) animation = data.rows[0].type;
+      // Get photo url
+      return db.query(`
+      SELECT photo_url
+      FROM photos
+      WHERE photos.id = $1
+      `, [(req.body.photo || 1)]);
+    })
+    .then((data) => {
+      photo = data.rows[0].photo_url;
+      // Get sound type
+      if (req.body.sound) {
+        return db.query(`
+        SELECT type
+        FROM ambient_sounds
+        WHERE ambient_sounds.id = $1
+        `, [req.body.sound]);
+      } else {
+        return null;
+      }
+    })
+    .then((data) => {
+      if (data) sound = data.rows[0].type;
+      res.render('preview', {title, animation, photo, sound, content, user});
+    });
+  });
+
   return router;
 
 };

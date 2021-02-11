@@ -34,7 +34,9 @@
               <td><%= contributions[contribution]["name"] %></td>
               <td class="upvotes"><%= contributions[contribution]["upvotes"] %></td>
               <td>
-                <button class="preview">Preview</button>
+                <form action="/stories/preview/<%= contributions[contribution]['contribution_id'] %>" method="GET" target="_blank">
+                  <button class="preview">Preview</button>
+                </form>
                 <form action="/stories/<%= contributions[0]['id'] %>/contributions/<%= contributions[contribution]['contribution_id'] %>/accept" method="POST">
                   <button class="accept">Accept</button>
                 </form>
