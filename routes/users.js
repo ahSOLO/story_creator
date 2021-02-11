@@ -62,6 +62,26 @@ module.exports = (db) => {
 
   });
 
+  // Render 401 page
+  router.get("/access_denied", (req, res) => {
+
+    const userID = req.session["user_id"];
+    let user;
+
+    helpers.getUserWithID(userID)
+    .then((data) => {
+      user = data;
+      const templateVars = { user };
+      res.render("no_access", templateVars);
+    })
+    .catch(err => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+
+  });
+
   return router;
 
 };
