@@ -35,12 +35,7 @@
       <div class="page" id="title">
         <img src="<%= entries[0].creator_photo %>">
         <h1><%= entries[0].title %></h1>
-        <p><b>By:</b> <%= entries[0].creator %> <% for (const [index, entry] of Object.entries(entries)) {%>
-          <% if(index >= entries.length - 1 && (entry.contributor)) { %>
-          <%=", and " + entry.contributor %>
-          <% } else if (entry.contributor) { %>
-          <%=", " + entry.contributor%>
-          <% }} %></p>
+        <p><b>By:</b> <%= authorString %></p>
         <br><br><br>
         <p id="scroll_text">SCROLL TO BEGIN THE STORY...</p>
         <i class="fas fa-chevron-down"></i>

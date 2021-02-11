@@ -9,9 +9,11 @@ module.exports = (db) => {
 
     const userID = req.session["user_id"];
     let user;
-
     let entries;
     let pendingContributions;
+    let authors = [];
+    let authorString = '';
+
     const queryString1 = `
     SELECT stories.title as title, creators.name as creator, contributors.name as contributor, creator_animations.type as creator_animation, creator_photos.photo_url as creator_photo, stories.first_entry as first_entry, creator_sounds.type as creator_sound, contributions.order_rank as ord, contributor_animations.type as contributor_anim, contributor_photos.photo_url as contributor_photo, contributions.content as contributor_entry, contributor_sounds.type as contributor_sound, contributions.text_position as contributor_position, stories.status as story_status
     FROM stories
@@ -50,12 +52,36 @@ module.exports = (db) => {
     })
     .then((data) => {
       entries = data.rows;
-      console.log(entries);
+
+      authors.push(entries[0]["creator"]);
+      for (entry of entries) {
+        if (!authors.includes(entry.contributor)) {
+          authors.push(entry.contributor);
+        }
+      };
+      for (const [index, author] of authors.entries()) {
+        if (author) {
+          if (index === authors.length - 1) {
+            authorString += ` and ${author}`;
+          } else if (index === 0) {
+            authorString += author;
+          } else {
+            authorString += `, ${author}`;
+          }
+        }
+      };
+
       return db.query(queryString2, queryParams2);
     })
     .then((data) => {
       pendingContributions = (data.rows)
-      const templateVars = { entries, pendingContributions, storyID:req.params.storyID, user };
+      const templateVars = {
+        entries,
+        authorString,
+        pendingContributions,
+        storyID:req.params.storyID,
+        user
+      };
       res.render("view_story", templateVars);
     })
     .catch(err => {
