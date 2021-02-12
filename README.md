@@ -1,9 +1,9 @@
 # Your Story
 
 ## About
-Your Story is web application which aims to facilitates collaborative story-telling. Users create the first entry to the story and others can contribute to it by suggesting how the story should continue, or by upvoting other contributions.
+Your Story facilitates collaborative story-telling through an online medium. Users create the first entry to a story and others can contribute to it by suggesting how the story should continue, or by upvoting other contributions.
 
-Your Story was designed to focus on the narrative process. Each story entry combines text with images and various audio and visual effects. The application also includes sentiment analysis which is ran on each entry in the story to suggest suitable photos to pair.
+Your Story is designed to focus on the narrative process. Each story entry combines text with images and various audio and visual effects. The application also includes sentiment analysis, ran on each story entry to suggest suitable photos to pair.
 
 ## Screenshots
 
@@ -13,9 +13,9 @@ Your Story was designed to focus on the narrative process. Each story entry comb
 
 ![snow_effect](demo/snow_effect.gif)
 
-![create_contribution](demo/create_contribution.png)
-
 ![upvotes](demo/upvotes.png)
+
+![create_contribution](demo/create_contribution.png)
 
 ## Dependencies
 
