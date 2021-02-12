@@ -22,14 +22,14 @@ div.intro_fixed {
 div.intro_scroll {
   z-index: 0;
   position: fixed;
-  height: 100vh;
+  height: 65vh;
+  padding-top: 5em;
   text-align: center;
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-bottom: 8em;
 
   p#title {
     font-size: 3.5rem;
